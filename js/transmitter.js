@@ -1,7 +1,4 @@
-/* ═══════════════════════════════════════════════════════════════
-   TRANSMITTER - Visual Output Controller
-   Manages all display modes: Morse, Christmas Lights, Binary, Audio
-   ═══════════════════════════════════════════════════════════════ */
+
 
 const Transmitter = {
     isTransmitting: false,
