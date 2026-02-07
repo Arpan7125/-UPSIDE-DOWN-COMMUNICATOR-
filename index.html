@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TACTICAL OPS COMMAND - WARZONE COMMS</title>
+    <meta name="description" content="Military tactical operations communication terminal - Secure channel transmissions">
+    
+    <!-- Military Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700;900&family=Rajdhani:wght@400;500;600;700&family=Black+Ops+One&family=VT323&display=swap" rel="stylesheet">
+    
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/crt.css">
+    <link rel="stylesheet" href="css/components.css">
+    <link rel="stylesheet" href="css/corruption.css">
+</head>
+<body>
+    <!-- Boot Screen -->
+    <div id="boot-screen" class="boot-screen">
+        <div class="boot-text">
+            <div class="boot-line" data-delay="0">╔════════════════════════════════════════╗</div>
+            <div class="boot-line" data-delay="200">║   U.S. TACTICAL OPERATIONS COMMAND     ║</div>
+            <div class="boot-line" data-delay="400">║   OPERATION WARZONE - TOP SECRET       ║</div>
+            <div class="boot-line" data-delay="600">╚════════════════════════════════════════╝</div>
+            <div class="boot-line" data-delay="900"></div>
+            <div class="boot-line" data-delay="1000">TACTICAL COMMS SYSTEM v4.7.2</div>
+            <div class="boot-line" data-delay="1200">DEFENSE ADVANCED RESEARCH PROJECTS</div>
+            <div class="boot-line" data-delay="1400"></div>
+            <div class="boot-line" data-delay="1600">SECURITY SCAN: ░░░░░░░░░░░░░░░░ CLEAR</div>
+            <div class="boot-line" data-delay="1900">ENCRYPTION: AES-256 ACTIVE</div>
+            <div class="boot-line" data-delay="2200">SATELLITE UPLINK: CONNECTED</div>
+            <div class="boot-line" data-delay="2500">THREAT LEVEL: ██████ ELEVATED ██████</div>
+            <div class="boot-line" data-delay="2800">FREQUENCY: 347.2 MHz SECURE</div>
+            <div class="boot-line" data-delay="3100"></div>
+            <div class="boot-line" data-delay="3300">█████████████████████████████████ 100%</div>
+            <div class="boot-line" data-delay="3600">SYSTEM OPERATIONAL.</div>
+            <div class="boot-line" data-delay="3900"></div>
+            <div class="boot-line blink" data-delay="4200">PRESS ANY KEY TO ACCESS TERMINAL_</div>
+        </div>
+    </div>
+
+    <!-- Main Terminal Container -->
+    <div id="terminal-container" class="terminal-container hidden">
+        <!-- CRT Effects Layers -->
+        <div class="crt-overlay"></div>
+        <div class="portal-pulse-overlay" id="portal-pulse-overlay"></div>
+        <div class="scanlines"></div>
+        <div class="screen-flicker"></div>
+        <div class="dead-pixels"></div>
+        <div class="static-burst"></div>
+        <div class="interlace"></div>
+        <div class="tube-glow"></div>
+        
+        <!-- Military Floating Particles -->
+        <div class="upside-down-particles" id="upside-down-particles">
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+        </div>
+        
+        <!-- Main Content -->
+        <div class="terminal-content">
+            <!-- Header -->
+            <header class="terminal-header">
+                <div class="header-left">
+                    <span class="led-indicator active"></span>
+                    <span class="header-text">⚔ TACTICAL OPS COMMAND CENTER</span>
+                </div>
+                <div class="header-right">
+                    <a href="receiver.html" class="receiver-link" title="Go to Field Operations">◉ FIELD OPS</a>
+                    <span class="version">v4.7.2</span>
+                    <span class="status-text" id="connection-status">SIGNAL: ACTIVE</span>
+                </div>
+            </header>
+
+            <!-- Warning Banner -->
+            <div class="warning-banner" id="warning-banner">
+                <span class="warning-icon">⚠</span>
+                <span class="warning-text" id="warning-text">COMBAT ZONE ACTIVE - SECURE CHANNEL ENGAGED</span>
+                <span class="warning-icon">⚠</span>
+            </div>
+
+            <!-- Side Panel: Environmental Readings -->
+            <div class="environmental-panel">
+                <!-- Temperature (drops when portal active) -->
+                <div class="env-gauge temperature-gauge">
+                    <div class="env-icon">🌡</div>
+                    <div class="env-data">
+                        <div class="env-label">TEMP</div>
+                        <div class="env-value" id="temp-value">68°F</div>
+                    </div>
+                    <div class="env-bar">
+                        <div class="env-fill temp-fill" id="temp-fill"></div>
+                    </div>
+                </div>
+                
+                <!-- Eleven's Power Strain Meter -->
+                <div class="env-gauge strain-gauge">
+                    <div class="env-icon">🔮</div>
+                    <div class="env-data">
+                        <div class="env-label">PSI STRAIN</div>
+                        <div class="env-value" id="strain-value">0%</div>
+                    </div>
+                    <div class="env-bar">
+                        <div class="env-fill strain-fill" id="strain-fill"></div>
+                    </div>
+                    <div class="nosebleed-warning" id="nosebleed-warning">⚠ NOSEBLEED</div>
+                </div>
+                
+                <!-- Radio Frequency Dial -->
+                <div class="radio-dial-container">
+                    <div class="radio-label">FREQUENCY MHz</div>
+                    <div class="radio-dial" id="radio-dial">
+                        <div class="dial-needle" id="dial-needle"></div>
+                        <div class="dial-numbers">
+                            <span>88</span><span>92</span><span>96</span><span>100</span><span>104</span><span>108</span>
+                        </div>
+                    </div>
+                    <div class="radio-static" id="radio-static">▓▒░ SCANNING ░▒▓</div>
+                </div>
+            </div>
+
+            <!-- Christmas Lights Display (Joyce's Wall) -->
+            <section class="display-section">
+                <div class="section-label">═══ ALPHABET TRANSMISSION ARRAY ═══</div>
+                <div class="christmas-lights" id="christmas-lights">
+                    <div class="lights-wire"></div>
+                    <div class="lights-row">
+                        <div class="light-bulb" data-letter="A"><span class="bulb"></span><span class="letter">A</span></div>
+                        <div class="light-bulb" data-letter="B"><span class="bulb"></span><span class="letter">B</span></div>
+                        <div class="light-bulb" data-letter="C"><span class="bulb"></span><span class="letter">C</span></div>
+                        <div class="light-bulb" data-letter="D"><span class="bulb"></span><span class="letter">D</span></div>
+                        <div class="light-bulb" data-letter="E"><span class="bulb"></span><span class="letter">E</span></div>
+                        <div class="light-bulb" data-letter="F"><span class="bulb"></span><span class="letter">F</span></div>
+                        <div class="light-bulb" data-letter="G"><span class="bulb"></span><span class="letter">G</span></div>
+                        <div class="light-bulb" data-letter="H"><span class="bulb"></span><span class="letter">H</span></div>
+                        <div class="light-bulb" data-letter="I"><span class="bulb"></span><span class="letter">I</span></div>
+                        <div class="light-bulb" data-letter="J"><span class="bulb"></span><span class="letter">J</span></div>
+                        <div class="light-bulb" data-letter="K"><span class="bulb"></span><span class="letter">K</span></div>
+                        <div class="light-bulb" data-letter="L"><span class="bulb"></span><span class="letter">L</span></div>
+                        <div class="light-bulb" data-letter="M"><span class="bulb"></span><span class="letter">M</span></div>
+                    </div>
+                    <div class="lights-row">
+                        <div class="light-bulb" data-letter="N"><span class="bulb"></span><span class="letter">N</span></div>
+                        <div class="light-bulb" data-letter="O"><span class="bulb"></span><span class="letter">O</span></div>
+                        <div class="light-bulb" data-letter="P"><span class="bulb"></span><span class="letter">P</span></div>
+                        <div class="light-bulb" data-letter="Q"><span class="bulb"></span><span class="letter">Q</span></div>
+                        <div class="light-bulb" data-letter="R"><span class="bulb"></span><span class="letter">R</span></div>
+                        <div class="light-bulb" data-letter="S"><span class="bulb"></span><span class="letter">S</span></div>
+                        <div class="light-bulb" data-letter="T"><span class="bulb"></span><span class="letter">T</span></div>
+                        <div class="light-bulb" data-letter="U"><span class="bulb"></span><span class="letter">U</span></div>
+                        <div class="light-bulb" data-letter="V"><span class="bulb"></span><span class="letter">V</span></div>
+                        <div class="light-bulb" data-letter="W"><span class="bulb"></span><span class="letter">W</span></div>
+                        <div class="light-bulb" data-letter="X"><span class="bulb"></span><span class="letter">X</span></div>
+                        <div class="light-bulb" data-letter="Y"><span class="bulb"></span><span class="letter">Y</span></div>
+                        <div class="light-bulb" data-letter="Z"><span class="bulb"></span><span class="letter">Z</span></div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Transmission Displays Row -->
+            <div class="displays-row">
+                <!-- Morse Code Lamp -->
+                <section class="display-panel morse-panel">
+                    <div class="panel-header">MORSE LAMP</div>
+                    <div class="morse-lamp-container">
+                        <div class="morse-lamp" id="morse-lamp">
+                            <div class="lamp-housing"></div>
+                            <div class="lamp-glow"></div>
+                            <div class="lamp-bulb"></div>
+                            <div class="lamp-reflection"></div>
+                        </div>
+                        <div class="morse-output" id="morse-output">. . .   - - -   . . .</div>
+                    </div>
+                </section>
+
+                <!-- Binary Light Grid -->
+                <section class="display-panel binary-panel">
+                    <div class="panel-header">BINARY GRID</div>
+                    <div class="binary-grid" id="binary-grid">
+                        <div class="binary-light" data-bit="7"></div>
+                        <div class="binary-light" data-bit="6"></div>
+                        <div class="binary-light" data-bit="5"></div>
+                        <div class="binary-light" data-bit="4"></div>
+                        <div class="binary-light" data-bit="3"></div>
+                        <div class="binary-light" data-bit="2"></div>
+                        <div class="binary-light" data-bit="1"></div>
+                        <div class="binary-light" data-bit="0"></div>
+                    </div>
+                    <div class="binary-value" id="binary-value">00000000</div>
+                    <div class="binary-char" id="binary-char">_</div>
+                </section>
+
+                <!-- Oscilloscope -->
+                <section class="display-panel oscilloscope-panel">
+                    <div class="panel-header">AUDIO WAVEFORM</div>
+                    <div class="oscilloscope-container">
+                        <div class="oscilloscope-bezel">
+                            <canvas id="oscilloscope" width="200" height="80"></canvas>
+                            <div class="oscilloscope-grid"></div>
+                            <div class="oscilloscope-glow"></div>
+                        </div>
+                        <div class="oscilloscope-controls">
+                            <div class="osc-knob">GAIN</div>
+                            <div class="osc-knob">FREQ</div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Ancient Glyphs -->
+                <section class="display-panel glyph-panel">
+                    <div class="panel-header">ANCIENT GLYPHS</div>
+                    <div class="glyph-display" id="glyph-display">_</div>
+                </section>
+            </div>
+
+            <!-- Message Input Section -->
+            <section class="input-section">
+                <div class="section-label">═══ MESSAGE INPUT TERMINAL ═══</div>
+                <div class="input-container">
+                    <span class="input-prompt">&gt; ENTER MESSAGE:</span>
+                    <input type="text" id="message-input" class="message-input" maxlength="50" autocomplete="off" spellcheck="false">
+                    <span class="input-cursor">_</span>
+                </div>
+                <!-- Transmission Log -->
+                <div class="transmission-log" id="transmission-log">
+                    <div class="log-header">LAST TRANSMISSIONS:</div>
+                    <div class="log-entries" id="log-entries">
+                        <div class="log-entry">-- NO TRANSMISSIONS LOGGED --</div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Mode Selection -->
+            <section class="mode-section">
+                <div class="mode-label">TRANSMISSION MODE:</div>
+                <div class="mode-switches">
+                    <label class="toggle-switch">
+                        <input type="radio" name="mode" value="morse" checked>
+                        <span class="switch-label">MORSE</span>
+                        <span class="switch-indicator"></span>
+                    </label>
+                    <label class="toggle-switch">
+                        <input type="radio" name="mode" value="christmas">
+                        <span class="switch-label">LIGHTS</span>
+                        <span class="switch-indicator"></span>
+                    </label>
+                    <label class="toggle-switch">
+                        <input type="radio" name="mode" value="binary">
+                        <span class="switch-label">BINARY</span>
+                        <span class="switch-indicator"></span>
+                    </label>
+                    <label class="toggle-switch">
+                        <input type="radio" name="mode" value="audio">
+                        <span class="switch-label">AUDIO</span>
+                        <span class="switch-indicator"></span>
+                    </label>
+                    <label class="toggle-switch">
+                        <input type="radio" name="mode" value="glyphs">
+                        <span class="switch-label">GLYPHS</span>
+                        <span class="switch-indicator"></span>
+                    </label>
+                    <label class="toggle-switch">
+                        <input type="radio" name="mode" value="pulse">
+                        <span class="switch-label">PULSE</span>
+                        <span class="switch-indicator"></span>
+                    </label>
+                </div>
+            </section>
+
+            <!-- Control Panel -->
+            <section class="control-panel">
+                <!-- Gauges -->
+                <div class="gauges-container">
+                    <div class="gauge">
+                        <div class="gauge-label">SANITY</div>
+                        <div class="gauge-display">
+                            <div class="gauge-bar" id="sanity-bar">
+                                <div class="gauge-fill" id="sanity-fill"></div>
+                            </div>
+                            <div class="gauge-value" id="sanity-value">100%</div>
+                        </div>
+                        <div class="gauge-warning" id="sanity-warning">CRITICAL</div>
+                    </div>
+                    <div class="gauge">
+                        <div class="gauge-label">SIGNAL</div>
+                        <div class="gauge-display">
+                            <div class="gauge-bar">
+                                <div class="gauge-fill signal-fill" id="signal-fill"></div>
+                            </div>
+                            <div class="gauge-value" id="signal-value">87%</div>
+                        </div>
+                    </div>
+                    <div class="gauge">
+                        <div class="gauge-label">POWER</div>
+                        <div class="gauge-display">
+                            <div class="gauge-bar">
+                                <div class="gauge-fill power-fill" id="power-fill"></div>
+                            </div>
+                            <div class="gauge-value" id="power-value">92%</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Transmit Button -->
+                <div class="transmit-container">
+                    <button id="transmit-btn" class="transmit-btn">
+                        <span class="btn-icon">◉</span>
+                        <span class="btn-text">TRANSMIT</span>
+                    </button>
+                    <div class="speed-control">
+                        <label>SPEED:</label>
+                        <input type="range" id="speed-slider" min="1" max="5" value="3">
+                        <span id="speed-value">3</span>
+                    </div>
+                </div>
+
+                <!-- Demogorgon Warning -->
+                <div class="demogorgon-warning" id="demogorgon-warning">
+                    <div class="warning-pulse"></div>
+                    <span class="warning-label">⚠ ENTITY DETECTED</span>
+                </div>
+            </section>
+
+            <!-- Received Messages Section (from Upside Down) -->
+            <section class="received-section">
+                <div class="section-label">═══ INCOMING FROM UPSIDE DOWN ═══</div>
+                <div class="receive-indicator">
+                    <div class="signal-icon" id="receive-signal">◎</div>
+                    <span class="receive-status" id="receive-status">LISTENING FOR SIGNALS...</span>
+                </div>
+                <div class="received-message-display" id="received-message-display">
+                    <span class="waiting-text">AWAITING TRANSMISSION FROM UPSIDE DOWN</span>
+                </div>
+                <div class="received-history" id="received-history">
+                    <div class="history-label">RECEIVED LOG:</div>
+                    <div class="history-entries" id="received-entries">
+                        <span class="no-messages">NO MESSAGES YET</span>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Status Bar -->
+            <footer class="status-bar">
+                <span class="status-item">HAWKINS LAB TERMINAL</span>
+                <span class="status-item" id="datetime"></span>
+                <span class="status-item">DIMENSION: UPSIDE DOWN</span>
+                <span class="status-item recovery-hint" id="recovery-hint">[HIDDEN ESCAPE: ↑↑↓↓←→←→BA]</span>
+            </footer>
+        </div>
+
+        <!-- Vecna's Clock -->
+        <div class="vecna-clock" id="vecna-clock">
+            <div class="clock-face">
+                <div class="clock-hand hour-hand"></div>
+                <div class="clock-hand minute-hand"></div>
+                <div class="clock-center"></div>
+            </div>
+            <div class="clock-chime" id="clock-chime">🕰️ BONG...</div>
+        </div>
+
+        <!-- Power Flicker Overlay -->
+        <div class="power-flicker-overlay" id="power-flicker-overlay"></div>
+
+        <!-- Possessed Mode Overlay -->
+        <div class="possessed-overlay" id="possessed-overlay">
+            <div class="possessed-text">
+                <div class="glitch-text" data-text="POSSESSED">POSSESSED</div>
+                <div class="possessed-subtext">THE MIND FLAYER HAS CONTROL</div>
+                <div class="escape-hint">FIND THE ESCAPE SEQUENCE TO BREAK FREE</div>
+                <div class="possessed-countdown" id="possessed-countdown">30</div>
+            </div>
+            <div class="static-noise"></div>
+            <div class="mind-flayer-tendrils"></div>
+        </div>
+
+        <!-- Recovery Flash -->
+        <div class="recovery-flash" id="recovery-flash">
+            <div class="recovery-text">SYSTEM RESTORED</div>
+        </div>
+
+        <!-- Hidden Recovery Pixel -->
+        <div class="hidden-pixel" id="hidden-pixel" title="???"></div>
+
+        <!-- Ambient Audio Indicator -->
+        <div class="audio-indicator" id="audio-indicator">
+            <span class="audio-icon">🔊</span>
+            <span class="audio-text">CLICK FOR AUDIO</span>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="js/encoder.js"></script>
+    <script src="js/transmitter.js"></script>
+    <script src="js/audio.js"></script>
+    <script src="js/sanity.js"></script>
+    <script src="js/recovery.js"></script>
+    <script src="js/app.js"></script>
+</body>
+</html>

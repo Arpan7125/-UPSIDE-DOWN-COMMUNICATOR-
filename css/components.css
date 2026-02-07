@@ -1,0 +1,996 @@
+/* ═══════════════════════════════════════════════════════════════
+   HAWKINS TERMINAL COMPONENTS
+   Retro 1983 Hardware-Accurate UI Elements
+   ═══════════════════════════════════════════════════════════════ */
+
+/* ═══════════════════════════════════════════════════════════════
+   CHRISTMAS LIGHTS (Joyce's Wall)
+   ═══════════════════════════════════════════════════════════════ */
+
+.christmas-lights {
+    background: #0a0a0a;
+    border: 3px solid #1a1a0a;
+    padding: 15px 10px;
+    position: relative;
+    box-shadow: inset 0 0 30px rgba(0,0,0,0.8);
+}
+
+/* String wire effect */
+.lights-wire {
+    position: absolute;
+    top: 0;
+    left: 5%;
+    right: 5%;
+    height: 2px;
+    background: #111;
+    box-shadow: 0 10px 0 #111, 0 20px 0 #111;
+}
+
+.lights-row {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    margin-bottom: 10px;
+    position: relative;
+}
+
+.lights-row::before {
+    content: '';
+    position: absolute;
+    top: -5px;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, #222, transparent);
+}
+
+.light-bulb {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 3px;
+    position: relative;
+}
+
+/* Wire to each bulb */
+.light-bulb::before {
+    content: '';
+    position: absolute;
+    top: -8px;
+    width: 1px;
+    height: 8px;
+    background: #333;
+}
+
+.bulb {
+    width: 14px;
+    height: 18px;
+    border-radius: 50% 50% 45% 45%;
+    background: linear-gradient(180deg, #222 0%, #111 100%);
+    border: 1px solid #333;
+    position: relative;
+    transition: all 0.1s;
+}
+
+/* Bulb cap */
+.bulb::before {
+    content: '';
+    position: absolute;
+    top: -3px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 6px;
+    height: 4px;
+    background: #444;
+    border-radius: 2px 2px 0 0;
+}
+
+.letter {
+    font-family: 'Press Start 2P', cursive;
+    font-size: 8px;
+    color: #333;
+    text-shadow: none;
+}
+
+/* Active bulb with color glow */
+.light-bulb.active .bulb {
+    animation: bulbGlow 0.1s ease-out;
+}
+
+.light-bulb[data-letter="A"].active .bulb,
+.light-bulb[data-letter="H"].active .bulb,
+.light-bulb[data-letter="O"].active .bulb,
+.light-bulb[data-letter="V"].active .bulb { background: #ff3333; box-shadow: 0 0 15px #ff3333, 0 0 30px #ff000066; }
+
+.light-bulb[data-letter="B"].active .bulb,
+.light-bulb[data-letter="I"].active .bulb,
+.light-bulb[data-letter="P"].active .bulb,
+.light-bulb[data-letter="W"].active .bulb { background: #33ff33; box-shadow: 0 0 15px #33ff33, 0 0 30px #00ff0066; }
+
+.light-bulb[data-letter="C"].active .bulb,
+.light-bulb[data-letter="J"].active .bulb,
+.light-bulb[data-letter="Q"].active .bulb,
+.light-bulb[data-letter="X"].active .bulb { background: #3333ff; box-shadow: 0 0 15px #3333ff, 0 0 30px #0000ff66; }
+
+.light-bulb[data-letter="D"].active .bulb,
+.light-bulb[data-letter="K"].active .bulb,
+.light-bulb[data-letter="R"].active .bulb,
+.light-bulb[data-letter="Y"].active .bulb { background: #ffff33; box-shadow: 0 0 15px #ffff33, 0 0 30px #ffff0066; }
+
+.light-bulb[data-letter="E"].active .bulb,
+.light-bulb[data-letter="L"].active .bulb,
+.light-bulb[data-letter="S"].active .bulb,
+.light-bulb[data-letter="Z"].active .bulb { background: #ff33ff; box-shadow: 0 0 15px #ff33ff, 0 0 30px #ff00ff66; }
+
+.light-bulb[data-letter="F"].active .bulb,
+.light-bulb[data-letter="M"].active .bulb,
+.light-bulb[data-letter="T"].active .bulb { background: #33ffff; box-shadow: 0 0 15px #33ffff, 0 0 30px #00ffff66; }
+
+.light-bulb[data-letter="G"].active .bulb,
+.light-bulb[data-letter="N"].active .bulb,
+.light-bulb[data-letter="U"].active .bulb { background: #ff9933; box-shadow: 0 0 15px #ff9933, 0 0 30px #ff660066; }
+
+.light-bulb.active .letter {
+    color: #fff;
+    text-shadow: 0 0 5px currentColor;
+}
+
+@keyframes bulbGlow {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.2); }
+    100% { transform: scale(1); }
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   MORSE LAMP (Industrial Style)
+   ═══════════════════════════════════════════════════════════════ */
+
+.morse-lamp-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+}
+
+.morse-lamp {
+    width: 50px;
+    height: 60px;
+    position: relative;
+}
+
+.lamp-housing {
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 40px;
+    height: 15px;
+    background: linear-gradient(180deg, #444 0%, #222 100%);
+    border-radius: 0 0 5px 5px;
+    border: 2px solid #555;
+    border-top: none;
+}
+
+.lamp-bulb {
+    position: absolute;
+    bottom: 15px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 30px;
+    height: 35px;
+    background: linear-gradient(180deg, #1a1a1a 0%, #0a0a0a 100%);
+    border-radius: 50% 50% 40% 40%;
+    border: 2px solid #333;
+    transition: all 0.05s;
+}
+
+.lamp-glow {
+    position: absolute;
+    bottom: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 45px;
+    height: 50px;
+    border-radius: 50%;
+    background: transparent;
+    transition: all 0.05s;
+}
+
+.lamp-reflection {
+    position: absolute;
+    bottom: 25px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 8px;
+    height: 12px;
+    background: rgba(255,255,255,0.1);
+    border-radius: 50%;
+}
+
+.morse-lamp.on .lamp-bulb {
+    background: linear-gradient(180deg, #ffff99 0%, #ffcc00 50%, #ff9900 100%);
+    border-color: #ffcc00;
+}
+
+.morse-lamp.on .lamp-glow {
+    background: radial-gradient(ellipse, rgba(255,200,0,0.4) 0%, transparent 70%);
+    box-shadow: 0 0 30px #ffcc00, 0 0 60px #ff990066;
+}
+
+.morse-lamp.on .lamp-reflection {
+    background: rgba(255,255,255,0.6);
+}
+
+.morse-output {
+    font-family: var(--font-terminal);
+    font-size: 14px;
+    color: var(--text-dim);
+    letter-spacing: 2px;
+    max-width: 150px;
+    word-break: break-all;
+    text-align: center;
+    min-height: 20px;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   BINARY LIGHT GRID
+   ═══════════════════════════════════════════════════════════════ */
+
+.binary-grid {
+    display: flex;
+    gap: 6px;
+    justify-content: center;
+    margin-bottom: 8px;
+}
+
+.binary-light {
+    width: 16px;
+    height: 16px;
+    background: #0a0a0a;
+    border: 2px solid #333;
+    position: relative;
+}
+
+.binary-light::after {
+    content: attr(data-bit);
+    position: absolute;
+    bottom: -14px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 8px;
+    color: #333;
+}
+
+.binary-light.on {
+    background: var(--phosphor-green);
+    border-color: var(--phosphor-green);
+    box-shadow: 0 0 10px var(--phosphor-green), inset 0 0 5px rgba(255,255,255,0.3);
+}
+
+.binary-value {
+    font-family: var(--font-terminal);
+    font-size: 14px;
+    color: var(--phosphor-green);
+    letter-spacing: 3px;
+    text-align: center;
+    margin-top: 5px;
+}
+
+.binary-char {
+    font-size: 24px;
+    color: var(--phosphor-green);
+    text-align: center;
+    text-shadow: 0 0 10px var(--phosphor-green);
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   OSCILLOSCOPE
+   ═══════════════════════════════════════════════════════════════ */
+
+.oscilloscope-container {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.oscilloscope-bezel {
+    position: relative;
+    background: #111;
+    border: 3px solid #333;
+    border-radius: 5px;
+    padding: 5px;
+    box-shadow: inset 0 0 20px rgba(0,0,0,0.8);
+}
+
+#oscilloscope {
+    display: block;
+    background: #000a00;
+    border: 1px solid #1a1a1a;
+}
+
+.oscilloscope-grid {
+    position: absolute;
+    inset: 5px;
+    pointer-events: none;
+    background: 
+        linear-gradient(90deg, rgba(0,100,0,0.1) 1px, transparent 1px),
+        linear-gradient(0deg, rgba(0,100,0,0.1) 1px, transparent 1px);
+    background-size: 20px 20px;
+}
+
+.oscilloscope-glow {
+    position: absolute;
+    inset: 5px;
+    pointer-events: none;
+    border-radius: 2px;
+    box-shadow: inset 0 0 20px rgba(0,255,0,0.1);
+}
+
+.oscilloscope-controls {
+    display: flex;
+    justify-content: space-around;
+}
+
+.osc-knob {
+    font-size: 8px;
+    color: #444;
+    padding: 3px 8px;
+    border: 1px solid #333;
+    background: linear-gradient(180deg, #2a2a2a 0%, #1a1a1a 100%);
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   ENVIRONMENTAL PANEL (Temperature, PSI, Radio)
+   ═══════════════════════════════════════════════════════════════ */
+
+.environmental-panel {
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+    flex-wrap: wrap;
+    padding: 10px;
+    background: var(--terminal-dark);
+    border: 2px solid var(--panel-border);
+    margin-bottom: 10px;
+}
+
+.env-gauge {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 5px 10px;
+    border: 1px solid #222;
+    background: #0a0a0a;
+}
+
+.env-icon {
+    font-size: 16px;
+    filter: grayscale(1);
+}
+
+.env-data {
+    text-align: center;
+}
+
+.env-label {
+    font-size: 8px;
+    color: #444;
+    letter-spacing: 1px;
+}
+
+.env-value {
+    font-size: 14px;
+    color: var(--phosphor-green);
+}
+
+.env-bar {
+    width: 40px;
+    height: 8px;
+    background: #111;
+    border: 1px solid #333;
+}
+
+.env-fill {
+    height: 100%;
+    transition: all 0.5s;
+}
+
+.temp-fill {
+    background: linear-gradient(90deg, #0066ff, #00ff00, #ffff00, #ff6600, #ff0000);
+    width: 60%;
+}
+
+.strain-fill {
+    background: #ff0066;
+    width: 0%;
+}
+
+.nosebleed-warning {
+    font-size: 8px;
+    color: #ff0066;
+    display: none;
+    animation: blink 0.3s infinite;
+}
+
+.nosebleed-warning.visible {
+    display: block;
+}
+
+/* Radio Dial */
+.radio-dial-container {
+    padding: 8px 15px;
+    border: 1px solid #222;
+    background: #0a0a0a;
+}
+
+.radio-label {
+    font-size: 8px;
+    color: #444;
+    text-align: center;
+    margin-bottom: 5px;
+}
+
+.radio-dial {
+    width: 100px;
+    height: 20px;
+    background: linear-gradient(180deg, #1a1a1a, #0a0a0a);
+    border: 1px solid #333;
+    position: relative;
+    overflow: hidden;
+}
+
+.dial-needle {
+    position: absolute;
+    top: 2px;
+    left: 30%;
+    width: 2px;
+    height: 16px;
+    background: #ff3300;
+    box-shadow: 0 0 5px #ff3300;
+    transition: left 0.1s;
+}
+
+.dial-numbers {
+    display: flex;
+    justify-content: space-between;
+    font-size: 6px;
+    color: #444;
+    padding: 0 5px;
+    margin-top: 3px;
+}
+
+.radio-static {
+    font-size: 8px;
+    color: #444;
+    text-align: center;
+    margin-top: 5px;
+    animation: staticText 0.2s infinite;
+}
+
+@keyframes staticText {
+    0%, 100% { opacity: 0.5; }
+    50% { opacity: 1; }
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   TRANSMISSION LOG
+   ═══════════════════════════════════════════════════════════════ */
+
+.transmission-log {
+    margin-top: 10px;
+    border-top: 1px solid var(--panel-border);
+    padding-top: 8px;
+}
+
+.log-header {
+    font-size: 10px;
+    color: #444;
+    margin-bottom: 5px;
+}
+
+.log-entries {
+    max-height: 40px;
+    overflow-y: auto;
+}
+
+.log-entry {
+    font-size: 12px;
+    color: #333;
+    padding: 2px 0;
+}
+
+.log-entry:last-child {
+    color: var(--text-dim);
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   VECNA'S CLOCK
+   ═══════════════════════════════════════════════════════════════ */
+
+.vecna-clock {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    width: 60px;
+    height: 60px;
+    z-index: 80;
+    opacity: 0.3;
+    transition: opacity 0.5s;
+}
+
+.vecna-clock.active {
+    opacity: 1;
+    animation: clockPulse 1s infinite;
+}
+
+@keyframes clockPulse {
+    0%, 100% { filter: drop-shadow(0 0 10px #ff0000); }
+    50% { filter: drop-shadow(0 0 20px #ff3300); }
+}
+
+.clock-face {
+    width: 100%;
+    height: 100%;
+    border: 3px solid #333;
+    border-radius: 50%;
+    background: radial-gradient(circle, #1a1a1a 0%, #0a0a0a 100%);
+    position: relative;
+}
+
+.clock-hand {
+    position: absolute;
+    bottom: 50%;
+    left: 50%;
+    transform-origin: bottom center;
+    background: #666;
+}
+
+.hour-hand {
+    width: 3px;
+    height: 15px;
+    margin-left: -1.5px;
+    transform: rotate(0deg);
+}
+
+.minute-hand {
+    width: 2px;
+    height: 22px;
+    margin-left: -1px;
+    transform: rotate(0deg);
+}
+
+.clock-center {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 6px;
+    height: 6px;
+    background: #888;
+    border-radius: 50%;
+}
+
+.clock-chime {
+    display: none;
+    position: absolute;
+    top: 70px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 10px;
+    color: #ff3300;
+    white-space: nowrap;
+    animation: chimeFlash 0.5s infinite;
+}
+
+.clock-chime.active {
+    display: block;
+}
+
+@keyframes chimeFlash {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.3; }
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   UPSIDE DOWN PARTICLES
+   ═══════════════════════════════════════════════════════════════ */
+
+.upside-down-particles {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 35;
+    overflow: hidden;
+}
+
+.particle {
+    position: absolute;
+    width: 2px;
+    height: 2px;
+    background: rgba(100, 150, 200, 0.3);
+    animation: floatUp 15s linear infinite;
+}
+
+.particle:nth-child(1) { left: 10%; animation-delay: 0s; animation-duration: 12s; }
+.particle:nth-child(2) { left: 20%; animation-delay: 2s; animation-duration: 18s; }
+.particle:nth-child(3) { left: 35%; animation-delay: 4s; animation-duration: 14s; }
+.particle:nth-child(4) { left: 50%; animation-delay: 1s; animation-duration: 16s; }
+.particle:nth-child(5) { left: 65%; animation-delay: 3s; animation-duration: 20s; }
+.particle:nth-child(6) { left: 75%; animation-delay: 5s; animation-duration: 13s; }
+.particle:nth-child(7) { left: 85%; animation-delay: 2.5s; animation-duration: 17s; }
+.particle:nth-child(8) { left: 95%; animation-delay: 0.5s; animation-duration: 15s; }
+
+@keyframes floatUp {
+    0% {
+        bottom: -10px;
+        opacity: 0;
+        transform: translateX(0) scale(0.5);
+    }
+    10% {
+        opacity: 0.6;
+    }
+    90% {
+        opacity: 0.4;
+    }
+    100% {
+        bottom: 100%;
+        opacity: 0;
+        transform: translateX(20px) scale(1);
+    }
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   POWER FLICKER OVERLAY
+   ═══════════════════════════════════════════════════════════════ */
+
+.power-flicker-overlay {
+    position: fixed;
+    inset: 0;
+    background: #000;
+    pointer-events: none;
+    z-index: 500;
+    opacity: 0;
+}
+
+.power-flicker-overlay.flicker {
+    animation: powerFlicker 0.3s ease-out;
+}
+
+@keyframes powerFlicker {
+    0% { opacity: 1; }
+    20% { opacity: 0; }
+    40% { opacity: 0.8; }
+    60% { opacity: 0; }
+    80% { opacity: 0.5; }
+    100% { opacity: 0; }
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   AUDIO INDICATOR
+   ═══════════════════════════════════════════════════════════════ */
+
+.audio-indicator {
+    position: fixed;
+    bottom: 20px;
+    left: 20px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 12px;
+    background: rgba(0, 0, 0, 0.8);
+    border: 1px solid #333;
+    cursor: pointer;
+    z-index: 80;
+    transition: opacity 0.5s;
+}
+
+.audio-indicator.hidden {
+    opacity: 0;
+    pointer-events: none;
+}
+
+.audio-icon {
+    font-size: 14px;
+    filter: grayscale(1);
+}
+
+.audio-text {
+    font-size: 10px;
+    color: #666;
+}
+
+.audio-indicator:hover {
+    border-color: var(--phosphor-green);
+}
+
+.audio-indicator:hover .audio-text {
+    color: var(--phosphor-green);
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   MIND FLAYER TENDRILS (Possessed Mode)
+   ═══════════════════════════════════════════════════════════════ */
+
+.mind-flayer-tendrils {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    overflow: hidden;
+}
+
+.mind-flayer-tendrils::before,
+.mind-flayer-tendrils::after {
+    content: '';
+    position: absolute;
+    width: 200px;
+    height: 200px;
+    background: radial-gradient(ellipse, rgba(100, 0, 0, 0.3) 0%, transparent 70%);
+    animation: tendrilWave 3s ease-in-out infinite;
+}
+
+.mind-flayer-tendrils::before {
+    top: -50px;
+    left: -50px;
+    animation-delay: 0s;
+}
+
+.mind-flayer-tendrils::after {
+    bottom: -50px;
+    right: -50px;
+    animation-delay: 1.5s;
+}
+
+@keyframes tendrilWave {
+    0%, 100% { transform: scale(1) rotate(0deg); opacity: 0.5; }
+    50% { transform: scale(1.5) rotate(10deg); opacity: 0.8; }
+}
+
+/* Possessed countdown */
+.possessed-countdown {
+    font-family: var(--font-display);
+    font-size: 64px;
+    color: #ff0000;
+    margin-top: 30px;
+    text-shadow: 0 0 20px #ff0000;
+    animation: countdownPulse 1s infinite;
+}
+
+@keyframes countdownPulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   ANALOG VINTAGE GAUGE ENHANCEMENTS
+   ═══════════════════════════════════════════════════════════════ */
+
+.gauge-bar {
+    position: relative;
+    overflow: visible;
+}
+
+.gauge-bar::before {
+    content: '';
+    position: absolute;
+    top: -2px;
+    left: -2px;
+    right: -2px;
+    bottom: -2px;
+    border: 1px solid #222;
+    pointer-events: none;
+}
+
+/* Tick marks */
+.gauge-bar::after {
+    content: '│ │ │ │ │ │ │ │ │ │';
+    position: absolute;
+    top: -10px;
+    left: 0;
+    right: 0;
+    font-size: 8px;
+    color: #333;
+    letter-spacing: 2px;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   RECEIVED MESSAGES SECTION (from Upside Down)
+   ═══════════════════════════════════════════════════════════════ */
+
+.received-section {
+    margin-top: 20px;
+    padding: 15px;
+    background: linear-gradient(180deg, #0a0812 0%, #120a18 100%);
+    border: 2px solid #4a0060;
+    position: relative;
+    overflow: hidden;
+}
+
+.received-section::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse at center, rgba(100, 0, 150, 0.1) 0%, transparent 70%);
+    pointer-events: none;
+}
+
+.received-section .section-label {
+    text-align: center;
+    font-size: 12px;
+    color: #9966ff;
+    letter-spacing: 2px;
+    margin-bottom: 15px;
+    text-shadow: 0 0 10px rgba(150, 100, 255, 0.5);
+}
+
+.receive-indicator {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    margin-bottom: 15px;
+}
+
+.signal-icon {
+    font-size: 24px;
+    color: #444;
+    animation: signalPulse 2s ease-in-out infinite;
+}
+
+.signal-icon.active {
+    color: #ff00ff;
+    animation: signalActive 0.3s ease-in-out infinite;
+    text-shadow: 0 0 20px #ff00ff;
+}
+
+@keyframes signalPulse {
+    0%, 100% { opacity: 0.3; transform: scale(1); }
+    50% { opacity: 0.6; transform: scale(1.1); }
+}
+
+@keyframes signalActive {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.7; transform: scale(1.2); }
+}
+
+.receive-status {
+    font-size: 11px;
+    color: #666;
+    letter-spacing: 1px;
+}
+
+.receive-status.active {
+    color: #ff00ff;
+    animation: blink 0.5s infinite;
+}
+
+.received-message-display {
+    background: #050208;
+    border: 2px solid #330066;
+    padding: 20px;
+    min-height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 15px;
+    position: relative;
+}
+
+.received-message-display::before {
+    content: '';
+    position: absolute;
+    inset: 2px;
+    border: 1px solid #220044;
+    pointer-events: none;
+}
+
+.waiting-text {
+    font-size: 10px;
+    color: #333;
+    letter-spacing: 1px;
+}
+
+.received-message {
+    font-size: 24px;
+    color: #ff00ff;
+    text-shadow: 0 0 10px #ff00ff, 0 0 20px #9900ff;
+    animation: messageGlow 1s ease-out;
+    letter-spacing: 3px;
+}
+
+@keyframes messageGlow {
+    0% { opacity: 0; transform: scale(0.8); }
+    50% { opacity: 1; transform: scale(1.1); }
+    100% { opacity: 1; transform: scale(1); }
+}
+
+.received-history {
+    border-top: 1px solid #330066;
+    padding-top: 10px;
+}
+
+.received-history .history-label {
+    font-size: 10px;
+    color: #555;
+    margin-bottom: 8px;
+}
+
+.history-entries {
+    max-height: 80px;
+    overflow-y: auto;
+}
+
+.history-entries .no-messages {
+    font-size: 9px;
+    color: #333;
+}
+
+.received-entry {
+    font-size: 11px;
+    color: #9966ff;
+    padding: 3px 0;
+    border-bottom: 1px solid #220033;
+    display: flex;
+    justify-content: space-between;
+}
+
+.received-entry .msg-text {
+    flex: 1;
+    color: #cc66ff;
+}
+
+.received-entry .msg-time {
+    font-size: 9px;
+    color: #444;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   GLYPH PANEL (Ancient Runes)
+   ═══════════════════════════════════════════════════════════════ */
+
+.display-panel.glyph-panel .panel-header {
+    color: #ff3300;
+    border-bottom-color: #551100;
+}
+
+.glyph-display {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 60px;
+    background: #050000;
+    border: 1px solid #331100;
+    font-family: 'serif';
+    font-size: 32px;
+    color: #ff3300;
+    text-shadow: 0 0 10px #ff0000;
+    transition: all 0.2s;
+}
+
+.glyph-display.active {
+    animation: glyphPulse 0.3s ease-out;
+}
+
+@keyframes glyphPulse {
+    0% { transform: scale(1); filter: brightness(1); }
+    50% { transform: scale(1.1); filter: brightness(1.5); }
+    100% { transform: scale(1); filter: brightness(1); }
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   PORTAL PULSE OVERLAY
+   ═══════════════════════════════════════════════════════════════ */
+
+.portal-pulse-overlay {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 1000;
+    opacity: 0;
+    mix-blend-mode: screen;
+    transition: opacity 0.1s;
+}
+
+.portal-pulse-overlay.active {
+    opacity: 0.6;
+}
+

@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FIELD OPERATIONS - INCOMING TRANSMISSIONS</title>
+    <meta name="description" content="Field operations tactical receiver terminal for secure communications">
+    
+    <!-- Military Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700;900&family=Rajdhani:wght@400;500;600;700&family=Black+Ops+One&family=VT323&display=swap" rel="stylesheet">
+    
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/crt.css">
+    <link rel="stylesheet" href="css/components.css">
+    <link rel="stylesheet" href="css/receiver.css">
+</head>
+<body class="upside-down-mode">
+    <!-- Combat Zone Atmosphere -->
+    <div class="upside-down-atmosphere">
+        <div class="floating-ash"></div>
+        <div class="floating-ash"></div>
+        <div class="floating-ash"></div>
+        <div class="floating-ash"></div>
+        <div class="floating-ash"></div>
+        <div class="vine-tendril left"></div>
+        <div class="vine-tendril right"></div>
+    </div>
+
+    <!-- Main Receiver Container -->
+    <div id="receiver-container" class="terminal-container receiver-mode">
+        <!-- CRT Effects Layers -->
+        <div class="crt-overlay"></div>
+        <div class="portal-pulse-overlay" id="portal-pulse-overlay"></div>
+        <div class="scanlines"></div>
+        <div class="screen-flicker"></div>
+        <div class="static-burst"></div>
+        
+        <!-- Main Content -->
+        <div class="terminal-content">
+            <!-- Header -->
+            <header class="terminal-header receiver-header">
+                <div class="header-left">
+                    <span class="led-indicator receiving"></span>
+                    <span class="header-text">◉ FIELD OPERATIONS RECEIVER</span>
+                </div>
+                <div class="header-right">
+                    <a href="index.html" class="receiver-link" title="Go to Command Center">⚔ COMMAND HQ</a>
+                    <span class="version">v4.7.2</span>
+                    <span class="status-text" id="receiver-status">AWAITING SIGNAL...</span>
+                </div>
+            </header>
+
+            <!-- Warning Banner -->
+            <div class="warning-banner receiver-warning">
+                <span class="warning-icon">◎</span>
+                <span class="warning-text">FIELD OPERATIONS - SECURE CHANNEL</span>
+                <span class="warning-icon">◎</span>
+            </div>
+
+            <!-- Signal Strength Monitor -->
+            <div class="signal-monitor">
+                <div class="monitor-label">TACTICAL SIGNAL STRENGTH</div>
+                <div class="signal-bars">
+                    <div class="signal-bar" data-level="1"></div>
+                    <div class="signal-bar" data-level="2"></div>
+                    <div class="signal-bar" data-level="3"></div>
+                    <div class="signal-bar" data-level="4"></div>
+                    <div class="signal-bar" data-level="5"></div>
+                </div>
+                <div class="signal-status" id="signal-status">NO SIGNAL</div>
+            </div>
+
+            <!-- Christmas Lights Receiver (Joyce's Wall - Upside Down Version) -->
+            <section class="display-section receiver-display">
+                <div class="section-label">═══ INCOMING TRANSMISSION ═══</div>
+                <div class="christmas-lights receiver-lights" id="receiver-lights">
+                    <div class="lights-wire"></div>
+                    <div class="lights-row">
+                        <div class="light-bulb" data-letter="A"><span class="bulb"></span><span class="letter">A</span></div>
+                        <div class="light-bulb" data-letter="B"><span class="bulb"></span><span class="letter">B</span></div>
+                        <div class="light-bulb" data-letter="C"><span class="bulb"></span><span class="letter">C</span></div>
+                        <div class="light-bulb" data-letter="D"><span class="bulb"></span><span class="letter">D</span></div>
+                        <div class="light-bulb" data-letter="E"><span class="bulb"></span><span class="letter">E</span></div>
+                        <div class="light-bulb" data-letter="F"><span class="bulb"></span><span class="letter">F</span></div>
+                        <div class="light-bulb" data-letter="G"><span class="bulb"></span><span class="letter">G</span></div>
+                        <div class="light-bulb" data-letter="H"><span class="bulb"></span><span class="letter">H</span></div>
+                        <div class="light-bulb" data-letter="I"><span class="bulb"></span><span class="letter">I</span></div>
+                        <div class="light-bulb" data-letter="J"><span class="bulb"></span><span class="letter">J</span></div>
+                        <div class="light-bulb" data-letter="K"><span class="bulb"></span><span class="letter">K</span></div>
+                        <div class="light-bulb" data-letter="L"><span class="bulb"></span><span class="letter">L</span></div>
+                        <div class="light-bulb" data-letter="M"><span class="bulb"></span><span class="letter">M</span></div>
+                    </div>
+                    <div class="lights-row">
+                        <div class="light-bulb" data-letter="N"><span class="bulb"></span><span class="letter">N</span></div>
+                        <div class="light-bulb" data-letter="O"><span class="bulb"></span><span class="letter">O</span></div>
+                        <div class="light-bulb" data-letter="P"><span class="bulb"></span><span class="letter">P</span></div>
+                        <div class="light-bulb" data-letter="Q"><span class="bulb"></span><span class="letter">Q</span></div>
+                        <div class="light-bulb" data-letter="R"><span class="bulb"></span><span class="letter">R</span></div>
+                        <div class="light-bulb" data-letter="S"><span class="bulb"></span><span class="letter">S</span></div>
+                        <div class="light-bulb" data-letter="T"><span class="bulb"></span><span class="letter">T</span></div>
+                        <div class="light-bulb" data-letter="U"><span class="bulb"></span><span class="letter">U</span></div>
+                        <div class="light-bulb" data-letter="V"><span class="bulb"></span><span class="letter">V</span></div>
+                        <div class="light-bulb" data-letter="W"><span class="bulb"></span><span class="letter">W</span></div>
+                        <div class="light-bulb" data-letter="X"><span class="bulb"></span><span class="letter">X</span></div>
+                        <div class="light-bulb" data-letter="Y"><span class="bulb"></span><span class="letter">Y</span></div>
+                        <div class="light-bulb" data-letter="Z"><span class="bulb"></span><span class="letter">Z</span></div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Message Display -->
+            <section class="message-display-section">
+                <div class="section-label">═══ DECODED MESSAGE ═══</div>
+                <div class="decoded-message-container">
+                    <div class="decoded-message" id="decoded-message">
+                        <span class="message-placeholder">WAITING FOR TRANSMISSION...</span>
+                    </div>
+                    <div class="message-cursor">▌</div>
+                </div>
+            </section>
+
+            <!-- Receiver Displays Row -->
+            <div class="displays-row">
+                <!-- Morse Decoder -->
+                <section class="display-panel morse-panel">
+                    <div class="panel-header">MORSE DECODER</div>
+                    <div class="morse-lamp-container">
+                        <div class="morse-lamp" id="receiver-morse-lamp">
+                            <div class="lamp-housing"></div>
+                            <div class="lamp-glow"></div>
+                            <div class="lamp-bulb"></div>
+                            <div class="lamp-reflection"></div>
+                        </div>
+                        <div class="morse-output" id="receiver-morse-output">. . .   - - -   . . .</div>
+                    </div>
+                </section>
+
+                <!-- Binary Decoder -->
+                <section class="display-panel binary-panel">
+                    <div class="panel-header">BINARY DECODER</div>
+                    <div class="binary-grid" id="receiver-binary-grid">
+                        <div class="binary-light" data-bit="7"></div>
+                        <div class="binary-light" data-bit="6"></div>
+                        <div class="binary-light" data-bit="5"></div>
+                        <div class="binary-light" data-bit="4"></div>
+                        <div class="binary-light" data-bit="3"></div>
+                        <div class="binary-light" data-bit="2"></div>
+                        <div class="binary-light" data-bit="1"></div>
+                        <div class="binary-light" data-bit="0"></div>
+                    </div>
+                    <div class="binary-value" id="receiver-binary-value">00000000</div>
+                    <div class="binary-char" id="receiver-binary-char">_</div>
+                </section>
+
+                <!-- Audio Waveform -->
+                <section class="display-panel oscilloscope-panel">
+                    <div class="panel-header">AUDIO ANALYZER</div>
+                    <div class="oscilloscope-container">
+                        <div class="oscilloscope-bezel">
+                            <canvas id="receiver-oscilloscope" width="200" height="80"></canvas>
+                            <div class="oscilloscope-grid"></div>
+                            <div class="oscilloscope-glow"></div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Glyph Decoder -->
+                <section class="display-panel glyph-panel">
+                    <div class="panel-header">GLYPH DECODER</div>
+                    <div class="glyph-display" id="receiver-glyph-display">_</div>
+                </section>
+            </div>
+
+            <!-- Message History -->
+            <section class="message-history-section">
+                <div class="section-label">═══ RECEIVED TRANSMISSIONS ═══</div>
+                <div class="message-history" id="message-history">
+                    <div class="history-entry placeholder">NO MESSAGES RECEIVED YET</div>
+                </div>
+            </section>
+
+            <!-- Send Message Section -->
+            <section class="send-message-section">
+                <div class="section-label">═══ SEND TO THE RIGHT SIDE UP ═══</div>
+                <div class="send-controls">
+                    <div class="mode-selector">
+                        <label class="mode-option">
+                            <input type="radio" name="mode" value="christmas" checked>
+                            <span>LIGHTS</span>
+                        </label>
+                        <label class="mode-option">
+                            <input type="radio" name="mode" value="morse">
+                            <span>MORSE</span>
+                        </label>
+                        <label class="mode-option">
+                            <input type="radio" name="mode" value="binary">
+                            <span>BINARY</span>
+                        </label>
+                        <label class="mode-option">
+                            <input type="radio" name="mode" value="glyphs">
+                            <span>GLYPHS</span>
+                        </label>
+                        <label class="mode-option">
+                            <input type="radio" name="mode" value="pulse">
+                            <span>PULSE</span>
+                        </label>
+                    </div>
+                    <div class="input-row">
+                        <input type="text" id="message-input" class="message-input" placeholder="TYPE YOUR MESSAGE FROM THE UPSIDE DOWN..." maxlength="50" autocomplete="off">
+                        <button id="send-btn" class="transmit-btn">
+                            <span class="btn-icon">◈</span>
+                            <span class="btn-text">SEND</span>
+                        </button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Connection Control -->
+            <section class="connection-panel">
+                <div class="connection-info">
+                    <div class="connection-label">DIMENSION LINK:</div>
+                    <div class="connection-status" id="connection-status">
+                        <span class="status-dot"></span>
+                        <span class="status-text">DISCONNECTED</span>
+                    </div>
+                </div>
+                <button id="connect-btn" class="connect-btn">
+                    <span class="btn-icon">◎</span>
+                    <span class="btn-text">OPEN PORTAL</span>
+                </button>
+                <div class="link-info">
+                    <span>SENDER:</span>
+                    <a href="index.html" class="sender-link">GO TO SENDER TERMINAL →</a>
+                </div>
+            </section>
+
+            <!-- Status Bar -->
+            <footer class="status-bar receiver-status-bar">
+                <span class="status-item">UPSIDE DOWN TERMINAL</span>
+                <span class="status-item" id="datetime"></span>
+                <span class="status-item">DIMENSION: SHADOW REALM</span>
+                <span class="status-item">TEMP: <span id="temp-display">-40°F</span></span>
+            </footer>
+        </div>
+
+        <!-- Demogorgon Proximity Warning -->
+        <div class="demogorgon-alert" id="demogorgon-alert">
+            <div class="alert-content">
+                <div class="monster-icon">👹</div>
+                <div class="alert-text">DEMOGORGON NEARBY</div>
+                <div class="alert-warning">STAY QUIET</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="js/receiver.js"></script>
+</body>
+</html>

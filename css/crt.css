@@ -1,0 +1,369 @@
+/* ═══════════════════════════════════════════════════════════════
+   AUTHENTIC 1983 CRT MONITOR EFFECTS
+   Aged, Worn, and Battle-Scarred Terminal
+   ═══════════════════════════════════════════════════════════════ */
+
+/* CRT Overlay - Curved Glass Effect with Aging */
+.crt-overlay {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 50;
+    
+    /* Barrel distortion + vignette + yellowing */
+    background: 
+        /* Vignette - dark corners from aged tube */
+        radial-gradient(ellipse at center, 
+            transparent 0%, 
+            transparent 50%,
+            rgba(0, 0, 0, 0.3) 80%,
+            rgba(0, 0, 0, 0.7) 100%),
+        /* Yellowing from age */
+        radial-gradient(ellipse at center,
+            rgba(120, 100, 40, 0.05) 0%,
+            rgba(80, 60, 20, 0.1) 100%),
+        /* Corner shadow burn */
+        radial-gradient(ellipse at top left, rgba(0,0,0,0.4) 0%, transparent 40%),
+        radial-gradient(ellipse at top right, rgba(0,0,0,0.3) 0%, transparent 40%),
+        radial-gradient(ellipse at bottom left, rgba(0,0,0,0.35) 0%, transparent 40%),
+        radial-gradient(ellipse at bottom right, rgba(0,0,0,0.45) 0%, transparent 40%);
+    
+    /* CRT screen curvature */
+    border-radius: 20px;
+}
+
+/* Phosphor Burn-In Effect - Ghost Images */
+.crt-overlay::before {
+    content: 'HAWKINS LAB';
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-family: 'Press Start 2P', cursive;
+    font-size: 40px;
+    color: rgba(0, 50, 0, 0.03);
+    pointer-events: none;
+    z-index: 49;
+    letter-spacing: 10px;
+    text-shadow: 0 0 30px rgba(0, 100, 0, 0.05);
+}
+
+/* Screen Dust and Scratches Overlay */
+.crt-overlay::after {
+    content: '';
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    opacity: 0.15;
+    background-image: 
+        /* Dust particles */
+        radial-gradient(circle at 20% 30%, rgba(255,255,255,0.1) 0%, transparent 1%),
+        radial-gradient(circle at 70% 20%, rgba(255,255,255,0.08) 0%, transparent 0.5%),
+        radial-gradient(circle at 40% 70%, rgba(255,255,255,0.12) 0%, transparent 1%),
+        radial-gradient(circle at 80% 80%, rgba(255,255,255,0.06) 0%, transparent 0.8%),
+        radial-gradient(circle at 10% 60%, rgba(255,255,255,0.09) 0%, transparent 0.6%),
+        radial-gradient(circle at 90% 40%, rgba(255,255,255,0.07) 0%, transparent 0.4%),
+        radial-gradient(circle at 55% 45%, rgba(255,255,255,0.1) 0%, transparent 0.7%),
+        /* Scratches */
+        linear-gradient(135deg, transparent 45%, rgba(255,255,255,0.03) 45.5%, transparent 46%),
+        linear-gradient(45deg, transparent 65%, rgba(255,255,255,0.02) 65.5%, transparent 66%),
+        linear-gradient(170deg, transparent 30%, rgba(255,255,255,0.02) 30.2%, transparent 30.4%);
+    animation: dustShimmer 8s infinite;
+}
+
+@keyframes dustShimmer {
+    0%, 100% { opacity: 0.12; }
+    50% { opacity: 0.18; }
+}
+
+/* Heavy Scanlines - Like Old Monitors */
+.scanlines {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 60;
+    background: repeating-linear-gradient(
+        0deg,
+        rgba(0, 0, 0, 0.25) 0px,
+        rgba(0, 0, 0, 0.25) 1px,
+        transparent 1px,
+        transparent 3px
+    );
+    animation: scanlineFlicker 0.05s infinite;
+}
+
+@keyframes scanlineFlicker {
+    0% { opacity: 0.9; }
+    50% { opacity: 1; }
+    100% { opacity: 0.95; }
+}
+
+/* Horizontal Scan Line - Moving */
+.scanlines::before {
+    content: '';
+    position: fixed;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(
+        to bottom,
+        transparent,
+        rgba(0, 255, 0, 0.08),
+        transparent
+    );
+    animation: scanMove 8s linear infinite;
+    z-index: 61;
+}
+
+@keyframes scanMove {
+    0% { top: -10%; }
+    100% { top: 110%; }
+}
+
+/* RGB Sub-Pixel Structure */
+.scanlines::after {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background: repeating-linear-gradient(
+        90deg,
+        rgba(255, 0, 0, 0.02) 0px,
+        rgba(0, 255, 0, 0.02) 1px,
+        rgba(0, 0, 255, 0.02) 2px,
+        transparent 3px
+    );
+    pointer-events: none;
+}
+
+/* Screen Flicker - Random Brightness */
+.screen-flicker {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 55;
+    animation: screenFlicker 0.15s infinite;
+    background: transparent;
+}
+
+@keyframes screenFlicker {
+    0% { opacity: 0.98; }
+    5% { opacity: 1; }
+    10% { opacity: 0.96; }
+    15% { opacity: 1; }
+    20% { opacity: 0.99; }
+    25% { opacity: 0.94; }
+    30% { opacity: 1; }
+    35% { opacity: 0.97; }
+    40% { opacity: 1; }
+    45% { opacity: 0.95; }
+    50% { opacity: 1; }
+    55% { opacity: 0.98; }
+    60% { opacity: 0.93; }
+    65% { opacity: 1; }
+    70% { opacity: 0.96; }
+    75% { opacity: 1; }
+    80% { opacity: 0.97; }
+    85% { opacity: 0.92; }
+    90% { opacity: 1; }
+    95% { opacity: 0.98; }
+    100% { opacity: 1; }
+}
+
+/* Dead Pixels */
+.dead-pixels {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 45;
+}
+
+.dead-pixels::before,
+.dead-pixels::after {
+    content: '';
+    position: absolute;
+    width: 2px;
+    height: 2px;
+    background: #000;
+}
+
+.dead-pixels::before {
+    top: 23%;
+    left: 67%;
+}
+
+.dead-pixels::after {
+    top: 71%;
+    left: 34%;
+    width: 1px;
+    height: 1px;
+}
+
+/* Power On Effect */
+@keyframes powerOn {
+    0% {
+        filter: brightness(30);
+        transform: scaleY(0.02) scaleX(1.5);
+    }
+    20% {
+        filter: brightness(5);
+        transform: scaleY(0.8) scaleX(1.1);
+    }
+    40% {
+        filter: brightness(1.5);
+        transform: scaleY(1) scaleX(1);
+    }
+    60% {
+        filter: brightness(1.2);
+    }
+    80% {
+        filter: brightness(1);
+    }
+    100% {
+        filter: brightness(1);
+        transform: scale(1);
+    }
+}
+
+.power-on {
+    animation: powerOn 0.8s ease-out forwards;
+}
+
+/* Power Off Effect */
+@keyframes powerOff {
+    0% {
+        filter: brightness(1);
+        transform: scale(1);
+    }
+    30% {
+        filter: brightness(2);
+        transform: scaleY(0.8);
+    }
+    60% {
+        filter: brightness(5);
+        transform: scaleY(0.05) scaleX(1.2);
+    }
+    100% {
+        filter: brightness(50);
+        transform: scaleY(0.001) scaleX(0.001);
+    }
+}
+
+.power-off {
+    animation: powerOff 0.5s ease-in forwards;
+}
+
+/* Horizontal Hold Issues - Periodic Roll */
+@keyframes horizontalRoll {
+    0%, 96% { transform: translateY(0); }
+    97% { transform: translateY(-2px); }
+    98% { transform: translateY(0); }
+    99% { transform: translateY(1px); }
+    100% { transform: translateY(0); }
+}
+
+.terminal-content {
+    animation: horizontalRoll 15s infinite;
+}
+
+/* Color Bleed on Text */
+.terminal-content * {
+    text-shadow: 
+        0 0 2px currentColor,
+        1px 0 0 rgba(255, 0, 0, 0.1),
+        -1px 0 0 rgba(0, 255, 255, 0.1);
+}
+
+/* Phosphor Glow Persistence */
+.terminal-content input,
+.terminal-content button,
+.terminal-content .light-bulb.active {
+    transition: all 0.1s ease-out;
+}
+
+.terminal-content input:focus,
+.terminal-content button:hover {
+    text-shadow: 
+        0 0 5px var(--phosphor-green),
+        0 0 10px var(--phosphor-green),
+        0 0 20px var(--phosphor-green);
+}
+
+/* Electron Gun Warm-Up Effect */
+.boot-screen {
+    animation: electronWarmup 2s ease-out;
+}
+
+@keyframes electronWarmup {
+    0% {
+        filter: brightness(0.3) blur(2px);
+        transform: scale(0.98);
+    }
+    30% {
+        filter: brightness(0.7) blur(1px);
+        transform: scale(0.99);
+    }
+    60% {
+        filter: brightness(1) blur(0.5px);
+        transform: scale(1);
+    }
+    100% {
+        filter: brightness(1) blur(0);
+        transform: scale(1);
+    }
+}
+
+/* Magnetic Interference Pattern */
+@keyframes magneticWarp {
+    0%, 100% { filter: none; }
+    50% { filter: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg"><filter id="warp"><feTurbulence baseFrequency="0.001" numOctaves="1" seed="0"/><feDisplacementMap in="SourceGraphic" scale="2"/></filter></svg>#warp'); }
+}
+
+/* Static Burst - Random Interference */
+@keyframes staticBurst {
+    0%, 97%, 100% { opacity: 0; }
+    98% { opacity: 0.5; }
+    99% { opacity: 0; }
+}
+
+.static-burst {
+    position: fixed;
+    inset: 0;
+    background: url('data:image/svg+xml,<svg viewBox="0 0 256 256" xmlns="http://www.w3.org/2000/svg"><filter id="noise"><feTurbulence baseFrequency="0.8" numOctaves="4" stitchTiles="stitch"/></filter><rect width="100%" height="100%" filter="url(%23noise)"/></svg>');
+    pointer-events: none;
+    z-index: 70;
+    mix-blend-mode: overlay;
+    animation: staticBurst 10s infinite;
+}
+
+/* Interlacing Effect */
+.interlace {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 62;
+    background: repeating-linear-gradient(
+        0deg,
+        transparent 0px,
+        transparent 2px,
+        rgba(0, 0, 0, 0.05) 2px,
+        rgba(0, 0, 0, 0.05) 4px
+    );
+    animation: interlaceShift 0.0333s steps(2) infinite;
+}
+
+@keyframes interlaceShift {
+    0% { transform: translateY(0); }
+    100% { transform: translateY(2px); }
+}
+
+/* Tube Glow - Inner Edge Light */
+.tube-glow {
+    position: fixed;
+    inset: 10px;
+    pointer-events: none;
+    z-index: 40;
+    border-radius: 15px;
+    box-shadow: 
+        inset 0 0 100px rgba(0, 255, 0, 0.03),
+        inset 0 0 50px rgba(0, 255, 0, 0.02);
+}

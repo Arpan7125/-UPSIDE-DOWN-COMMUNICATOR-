@@ -1,0 +1,604 @@
+/* ═══════════════════════════════════════════════════════════════
+   FIELD OPERATIONS RECEIVER - TACTICAL HUD STYLES
+   Military Combat Communication Terminal
+   ═══════════════════════════════════════════════════════════════ */
+
+/* Field Ops Mode - Base Modifications */
+body.upside-down-mode {
+    background: linear-gradient(135deg, #0a0c08 0%, #0d1009 50%, #08090a 100%);
+    filter: none;
+}
+
+body.upside-down-mode .terminal-container {
+    filter: none;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   COMBAT ZONE ATMOSPHERE
+   ═══════════════════════════════════════════════════════════════ */
+
+.upside-down-atmosphere {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 5;
+    overflow: hidden;
+}
+
+/* Floating Particles (Smoke/Dust) */
+.floating-ash {
+    position: absolute;
+    width: 4px;
+    height: 4px;
+    background: rgba(255, 107, 0, 0.2);
+    border-radius: 50%;
+    animation: floatAsh 25s linear infinite;
+}
+
+.floating-ash:nth-child(1) { left: 5%; animation-delay: 0s; }
+.floating-ash:nth-child(2) { left: 25%; animation-delay: 4s; }
+.floating-ash:nth-child(3) { left: 45%; animation-delay: 2s; }
+.floating-ash:nth-child(4) { left: 65%; animation-delay: 6s; }
+.floating-ash:nth-child(5) { left: 85%; animation-delay: 1s; }
+
+@keyframes floatAsh {
+    0% {
+        top: 100%;
+        opacity: 0;
+        transform: translateX(0) rotate(0deg);
+    }
+    10% { opacity: 0.5; }
+    90% { opacity: 0.3; }
+    100% {
+        top: -10%;
+        opacity: 0;
+        transform: translateX(40px) rotate(360deg);
+    }
+}
+
+/* Edge Vignette Effects */
+.vine-tendril {
+    position: absolute;
+    width: 120px;
+    height: 100%;
+    background: linear-gradient(180deg, 
+        transparent 0%,
+        rgba(10, 12, 8, 0.4) 30%,
+        rgba(15, 18, 12, 0.6) 60%,
+        rgba(10, 12, 8, 0.8) 100%
+    );
+    animation: tendrilSway 15s ease-in-out infinite;
+}
+
+.vine-tendril.left {
+    left: 0;
+    transform-origin: top left;
+    background: linear-gradient(90deg, rgba(10, 12, 8, 0.9), transparent);
+}
+
+.vine-tendril.right {
+    right: 0;
+    transform-origin: top right;
+    background: linear-gradient(270deg, rgba(10, 12, 8, 0.9), transparent);
+}
+
+@keyframes tendrilSway {
+    0%, 100% { opacity: 0.8; }
+    50% { opacity: 1; }
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   RECEIVER MODE STYLES - TACTICAL GREEN PRIMARY
+   ═══════════════════════════════════════════════════════════════ */
+
+.receiver-mode {
+    --phosphor-green: var(--tactical-green-bright);
+    --phosphor-green-dim: rgba(74, 156, 64, 0.2);
+    --phosphor-green-glow: rgba(74, 156, 64, 0.5);
+}
+
+.receiver-header {
+    border-color: var(--tactical-green-bright);
+    box-shadow: 0 0 25px rgba(74, 156, 64, 0.4);
+    background: linear-gradient(180deg, rgba(20, 30, 15, 0.95) 0%, rgba(10, 15, 8, 0.95) 100%);
+}
+
+.receiver-warning {
+    background: linear-gradient(90deg, rgba(74, 156, 64, 0.15) 0%, rgba(74, 156, 64, 0.25) 50%, rgba(74, 156, 64, 0.15) 100%);
+    border-color: var(--tactical-green);
+    color: var(--tactical-green-bright);
+    animation: receiverWarning 2s infinite;
+}
+
+@keyframes receiverWarning {
+    0%, 100% { 
+        background: linear-gradient(90deg, rgba(74, 156, 64, 0.15) 0%, rgba(74, 156, 64, 0.25) 50%, rgba(74, 156, 64, 0.15) 100%);
+        border-color: var(--tactical-green);
+    }
+    50% { 
+        background: linear-gradient(90deg, rgba(74, 156, 64, 0.2) 0%, rgba(74, 156, 64, 0.35) 50%, rgba(74, 156, 64, 0.2) 100%);
+        border-color: var(--tactical-green-bright);
+    }
+}
+
+/* LED indicator for receiver */
+.led-indicator.receiving {
+    background: var(--tactical-green-bright);
+    box-shadow: 0 0 20px var(--tactical-green-bright);
+    animation: receivingPulse 1s infinite;
+    border-radius: 50%;
+}
+
+@keyframes receivingPulse {
+    0%, 100% { opacity: 0.5; box-shadow: 0 0 10px var(--tactical-green); }
+    50% { opacity: 1; box-shadow: 0 0 25px var(--tactical-green-bright); }
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   SIGNAL MONITOR - TACTICAL READOUT
+   ═══════════════════════════════════════════════════════════════ */
+
+.signal-monitor {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    padding: 12px 25px;
+    background: linear-gradient(180deg, rgba(20, 25, 15, 0.9) 0%, rgba(10, 12, 8, 0.9) 100%);
+    border: 2px solid var(--tactical-green);
+}
+
+.monitor-label {
+    font-size: 11px;
+    color: var(--hud-orange);
+    letter-spacing: 2px;
+    font-weight: 700;
+}
+
+.signal-bars {
+    display: flex;
+    gap: 4px;
+    align-items: flex-end;
+    height: 30px;
+}
+
+.signal-bar {
+    width: 10px;
+    background: rgba(74, 156, 64, 0.2);
+    border: 1px solid var(--tactical-green);
+    transition: all 0.3s;
+}
+
+.signal-bar[data-level="1"] { height: 6px; }
+.signal-bar[data-level="2"] { height: 12px; }
+.signal-bar[data-level="3"] { height: 18px; }
+.signal-bar[data-level="4"] { height: 24px; }
+.signal-bar[data-level="5"] { height: 30px; }
+
+.signal-bar.active {
+    background: var(--tactical-green-bright);
+    box-shadow: 0 0 10px rgba(74, 156, 64, 0.6);
+}
+
+.signal-bar.active[data-level="4"],
+.signal-bar.active[data-level="5"] {
+    background: var(--hud-orange);
+    border-color: var(--hud-orange);
+    box-shadow: 0 0 15px var(--hud-orange-glow);
+}
+
+.signal-status {
+    font-size: 13px;
+    color: var(--tactical-green-bright);
+    min-width: 120px;
+    text-align: center;
+    font-weight: 700;
+    letter-spacing: 1px;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   RECEIVER LIGHTS (Tactical Display)
+   ═══════════════════════════════════════════════════════════════ */
+
+.receiver-lights {
+    background: linear-gradient(180deg, rgba(10, 15, 8, 0.95) 0%, rgba(5, 8, 4, 0.95) 100%);
+    border-color: var(--tactical-green);
+}
+
+.receiver-display {
+    position: relative;
+}
+
+.receiver-display::before {
+    content: '';
+    position: absolute;
+    inset: -5px;
+    background: radial-gradient(ellipse at center, transparent 50%, rgba(0, 0, 0, 0.7) 100%);
+    pointer-events: none;
+    z-index: 1;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   DECODED MESSAGE DISPLAY - TACTICAL OUTPUT
+   ═══════════════════════════════════════════════════════════════ */
+
+.message-display-section {
+    background: linear-gradient(180deg, rgba(20, 25, 15, 0.95) 0%, rgba(10, 12, 8, 0.95) 100%);
+    border: 2px solid var(--tactical-green);
+    padding: 15px;
+    box-shadow: 0 0 15px rgba(74, 156, 64, 0.2);
+}
+
+.decoded-message-container {
+    display: flex;
+    align-items: center;
+    min-height: 50px;
+    padding: 12px;
+    background: rgba(0, 0, 0, 0.5);
+    border: 1px solid var(--tactical-green);
+}
+
+.decoded-message {
+    font-family: 'Rajdhani', var(--font-tactical);
+    font-size: 28px;
+    color: var(--tactical-green-bright);
+    text-shadow: 0 0 15px rgba(74, 156, 64, 0.7);
+    letter-spacing: 4px;
+    flex: 1;
+    font-weight: 700;
+}
+
+.message-placeholder {
+    color: var(--tactical-green);
+    font-size: 16px;
+    animation: placeholderPulse 2s infinite;
+    letter-spacing: 2px;
+}
+
+@keyframes placeholderPulse {
+    0%, 100% { opacity: 0.4; }
+    50% { opacity: 0.8; }
+}
+
+.message-cursor {
+    font-size: 28px;
+    color: var(--tactical-green-bright);
+    animation: blink 0.8s infinite;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   MESSAGE HISTORY - COMMS LOG
+   ═══════════════════════════════════════════════════════════════ */
+
+.message-history-section {
+    background: linear-gradient(180deg, rgba(20, 25, 15, 0.9) 0%, rgba(10, 12, 8, 0.9) 100%);
+    border: 2px solid var(--tactical-green);
+    padding: 12px;
+}
+
+.message-history {
+    max-height: 100px;
+    overflow-y: auto;
+    padding: 5px;
+}
+
+.history-entry {
+    font-size: 13px;
+    padding: 8px 12px;
+    margin-bottom: 5px;
+    background: rgba(74, 156, 64, 0.1);
+    border-left: 3px solid var(--tactical-green-bright);
+    display: flex;
+    justify-content: space-between;
+}
+
+.history-entry.placeholder {
+    color: var(--tactical-green);
+    border-color: var(--tactical-green);
+    text-align: center;
+    opacity: 0.6;
+}
+
+.history-time {
+    color: var(--hud-orange);
+    font-size: 11px;
+    font-weight: 600;
+}
+
+.history-message {
+    color: var(--tactical-green-bright);
+    letter-spacing: 1px;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   SEND MESSAGE SECTION (Field Ops to Command)
+   ═══════════════════════════════════════════════════════════════ */
+
+.send-message-section {
+    background: linear-gradient(180deg, rgba(25, 20, 10, 0.95) 0%, rgba(15, 12, 8, 0.95) 100%);
+    border: 2px solid var(--hud-orange);
+    padding: 15px;
+    margin-bottom: 15px;
+    box-shadow: 0 0 15px rgba(255, 107, 0, 0.2);
+}
+
+.send-controls {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.send-controls .mode-selector {
+    display: flex;
+    justify-content: center;
+    gap: 25px;
+}
+
+.send-controls .mode-option {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+    color: var(--hud-orange);
+    font-size: 12px;
+    transition: color 0.3s;
+    letter-spacing: 1px;
+}
+
+.send-controls .mode-option:hover {
+    color: #ffaa44;
+}
+
+.send-controls .mode-option input[type="radio"] {
+    accent-color: var(--hud-orange);
+}
+
+.send-controls .mode-option input:checked + span {
+    color: #ffaa44;
+    text-shadow: 0 0 10px var(--hud-orange-glow);
+}
+
+.send-controls .input-row {
+    display: flex;
+    gap: 12px;
+}
+
+.send-controls .message-input {
+    flex: 1;
+    padding: 12px 15px;
+    background: rgba(255, 107, 0, 0.1);
+    border: 2px solid var(--hud-orange-dim);
+    color: var(--hud-orange);
+    font-family: var(--font-tactical);
+    font-size: 16px;
+    letter-spacing: 2px;
+}
+
+.send-controls .message-input::placeholder {
+    color: var(--hud-orange-dim);
+}
+
+.send-controls .message-input:focus {
+    outline: none;
+    border-color: var(--hud-orange);
+    box-shadow: 0 0 20px rgba(255, 107, 0, 0.3);
+}
+
+.send-controls .transmit-btn {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 12px 30px;
+    background: linear-gradient(180deg, rgba(255, 107, 0, 0.2) 0%, rgba(180, 75, 0, 0.2) 100%);
+    border: 3px solid var(--hud-orange);
+    color: var(--hud-orange);
+    font-family: 'Black Ops One', var(--font-display);
+    font-size: 14px;
+    cursor: pointer;
+    transition: all 0.3s;
+    letter-spacing: 2px;
+}
+
+.send-controls .transmit-btn:hover {
+    background: linear-gradient(180deg, rgba(255, 107, 0, 0.35) 0%, rgba(180, 75, 0, 0.35) 100%);
+    box-shadow: 0 0 25px rgba(255, 107, 0, 0.5);
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   CONNECTION PANEL - TACTICAL LINK STATUS
+   ═══════════════════════════════════════════════════════════════ */
+
+.connection-panel {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+    padding: 15px;
+    background: linear-gradient(180deg, rgba(20, 25, 15, 0.9) 0%, rgba(10, 12, 8, 0.9) 100%);
+    border: 2px solid var(--tactical-green);
+    flex-wrap: wrap;
+}
+
+.connection-info {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.connection-label {
+    font-size: 12px;
+    color: var(--tactical-green-bright);
+    letter-spacing: 1px;
+    font-weight: 600;
+}
+
+.connection-status {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.status-dot {
+    width: 12px;
+    height: 12px;
+    background: var(--combat-red);
+    animation: disconnectedPulse 1s infinite;
+    border-radius: 50%;
+}
+
+.status-dot.connected {
+    background: var(--tactical-green-bright);
+    animation: connectedPulse 2s infinite;
+}
+
+@keyframes disconnectedPulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.3; }
+}
+
+@keyframes connectedPulse {
+    0%, 100% { opacity: 1; box-shadow: 0 0 15px var(--tactical-green-bright); }
+    50% { opacity: 0.8; box-shadow: 0 0 8px var(--tactical-green); }
+}
+
+.connect-btn {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 12px 25px;
+    background: linear-gradient(180deg, rgba(74, 156, 64, 0.15) 0%, rgba(50, 100, 40, 0.15) 100%);
+    border: 3px solid var(--tactical-green-bright);
+    color: var(--tactical-green-bright);
+    font-family: 'Rajdhani', var(--font-tactical);
+    font-size: 16px;
+    font-weight: 700;
+    cursor: pointer;
+    letter-spacing: 2px;
+}
+
+.connect-btn:hover {
+    background: linear-gradient(180deg, rgba(74, 156, 64, 0.3) 0%, rgba(50, 100, 40, 0.3) 100%);
+    box-shadow: 0 0 25px rgba(74, 156, 64, 0.5);
+}
+
+.connect-btn.connected {
+    border-color: var(--hud-orange);
+    color: var(--hud-orange);
+}
+
+.link-info {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 11px;
+    color: var(--tactical-green);
+    letter-spacing: 1px;
+}
+
+.sender-link {
+    color: var(--hud-orange);
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.sender-link:hover {
+    text-shadow: 0 0 10px var(--hud-orange-glow);
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   ENEMY CONTACT ALERT
+   ═══════════════════════════════════════════════════════════════ */
+
+.demogorgon-alert {
+    position: fixed;
+    inset: 0;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    background: rgba(30, 0, 0, 0.95);
+    z-index: 500;
+    animation: demoFlash 0.3s infinite;
+}
+
+.demogorgon-alert.active {
+    display: flex;
+}
+
+@keyframes demoFlash {
+    0%, 100% { background: rgba(30, 0, 0, 0.95); }
+    50% { background: rgba(50, 0, 0, 0.98); }
+}
+
+.alert-content {
+    text-align: center;
+}
+
+.monster-icon {
+    font-size: 80px;
+    animation: monsterPulse 0.5s infinite;
+}
+
+@keyframes monsterPulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+}
+
+.alert-text {
+    font-family: 'Black Ops One', var(--font-display);
+    font-size: 28px;
+    color: var(--combat-red);
+    margin-top: 20px;
+    text-shadow: 0 0 25px var(--combat-red);
+    letter-spacing: 3px;
+}
+
+.alert-warning {
+    font-size: 16px;
+    color: #ff6666;
+    margin-top: 15px;
+    animation: blink 0.5s infinite;
+    letter-spacing: 2px;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   RECEIVER STATUS BAR - FIELD READOUT
+   ═══════════════════════════════════════════════════════════════ */
+
+.receiver-status-bar {
+    background: linear-gradient(180deg, rgba(20, 25, 15, 0.9) 0%, rgba(10, 12, 8, 0.9) 100%);
+    border-color: var(--tactical-green);
+}
+
+#temp-display {
+    color: var(--hud-orange);
+    font-weight: 600;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   RECEIVING ANIMATION
+   ═══════════════════════════════════════════════════════════════ */
+
+.receiving-active .decoded-message {
+    animation: textGlow 0.5s infinite;
+}
+
+@keyframes textGlow {
+    0%, 100% { text-shadow: 0 0 15px rgba(74, 156, 64, 0.6); }
+    50% { text-shadow: 0 0 25px var(--tactical-green-bright), 0 0 35px rgba(74, 156, 64, 0.7); }
+}
+
+/* New message flash effect */
+.new-message-flash {
+    animation: newMessageFlash 0.5s ease-out;
+}
+
+@keyframes newMessageFlash {
+    0% { 
+        background: var(--tactical-green-bright);
+        color: #0a0c08;
+    }
+    100% { 
+        background: transparent;
+        color: var(--tactical-green-bright);
+    }
+}
