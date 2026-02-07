@@ -209,6 +209,7 @@ const Receiver = {
             const transmission = typeof data === 'string' ? JSON.parse(data) : data;
             const message = transmission.message;
             const mode = transmission.mode || 'christmas';
+            const speed = transmission.speed || 3;
 
             // Update status
             if (this.elements.receiverStatus) {
@@ -222,7 +223,7 @@ const Receiver = {
             this.updateSignalStrength(5);
 
             // Play receiving animation based on mode
-            this.playReceiveAnimation(message, mode);
+            this.playReceiveAnimation(message, mode, speed);
 
             // Random Demogorgon alert (rare)
             if (Math.random() > 0.9) {
@@ -234,9 +235,12 @@ const Receiver = {
         }
     },
 
-    playReceiveAnimation: async function (message, mode) {
+    playReceiveAnimation: async function (message, mode, speed = 3) {
         // Add receiving class
         document.body.classList.add('receiving-active');
+
+        const speedMultiplier = (6 - speed) * 100;
+        const charDelay = Math.max(200, speedMultiplier * 4);
 
         // Animate based on mode
         for (let i = 0; i < message.length; i++) {
@@ -274,7 +278,7 @@ const Receiver = {
             this.pulseOscilloscope();
 
             // Wait between characters
-            await this.sleep(300);
+            await this.sleep(charDelay);
         }
 
         // Complete

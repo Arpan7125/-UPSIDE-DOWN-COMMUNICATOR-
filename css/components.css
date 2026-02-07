@@ -967,7 +967,7 @@
 }
 
 .glyph-display.active {
-    animation: glyphPulse 0.3s ease-out;
+    animation: glyphPulse 0.2s ease-out;
 }
 
 @keyframes glyphPulse {

@@ -9,9 +9,8 @@ const Transmitter = {
     speed: 3, // 1-5 scale
     abortController: null,
 
-    // Speed multiplier (lower = faster)
     getSpeedMultiplier: function () {
-        return (6 - this.speed) * 100; // Speed 5 = 100ms, Speed 1 = 500ms
+        return Math.max(50, (6 - this.speed) * 100); // Ensure minimum delay
     },
 
     // Broadcast message to other pages via localStorage
@@ -20,6 +19,7 @@ const Transmitter = {
             id: Date.now() + '-' + Math.random().toString(36).substr(2, 9),
             message: message,
             mode: mode,
+            speed: this.speed,
             sender: 'sender', // Identify which page sent it
             timestamp: new Date().toISOString()
         };
@@ -240,7 +240,7 @@ const Transmitter = {
     async transmitGlyphs(message) {
         const glyphs = Encoder.toGlyphs(message);
         const display = document.getElementById('glyph-display');
-        const duration = this.getSpeedMultiplier() * 4;
+        const duration = Math.max(200, this.getSpeedMultiplier() * 4);
 
         for (let i = 0; i < glyphs.length; i++) {
             this.checkAbort();
