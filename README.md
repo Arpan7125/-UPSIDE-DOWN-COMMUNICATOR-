@@ -84,6 +84,9 @@ An acoustic-visual mode that generates frequency-modulated tones mapped to chara
 
 Detailed implementation notes and manual verification steps are available in the internal [walkthrough.md](./walkthrough.md).
 
+## 📽️ Project Presentation
+View the official project presentation on Canva: [**Upside Down Communicator Slides**](https://www.canva.com/design/DAHAnvmqWys/MOMNqJn8Phm4NgDrLRlPtA/view?utm_content=DAHAnvmqWys&utm_campaign=designshare&utm_medium=link2&utm_source=uniquelinks&utlId=h9e8be5d885)
+
 ## ⚖️ License
 This project is licensed under the MIT License - see the LICENSE file for details.
 

@@ -1,5 +1,8 @@
 # 📊 PowerPoint Presentation Outline: UPSIDE DOWN COMMUNICATOR
 
+> [!TIP]
+> **View the final presentation slides here:** [**Canva Link**](https://www.canva.com/design/DAHAnvmqWys/MOMNqJn8Phm4NgDrLRlPtA/view?utm_content=DAHAnvmqWys&utm_campaign=designshare&utm_medium=link2&utm_source=uniquelinks&utlId=h9e8be5d885)
+
 This document provides a slide-by-slide breakdown for a project presentation.
 
 ---
