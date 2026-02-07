@@ -46,7 +46,7 @@ body {
     font-family: var(--font-tactical);
     background: linear-gradient(135deg, #0a0c08 0%, #1a1e15 50%, #0f120b 100%);
     color: var(--text-bright);
-    font-size: 16px;
+    font-size: 18px;
     line-height: 1.4;
     cursor: crosshair;
     text-transform: uppercase;
@@ -213,7 +213,7 @@ body {
 
 .header-text {
     font-family: 'Black Ops One', var(--font-display);
-    font-size: 18px;
+    font-size: 22px;
     letter-spacing: 3px;
     color: var(--hud-orange);
     text-shadow: 0 0 15px var(--hud-orange-glow);
@@ -384,7 +384,7 @@ body {
 
 .input-prompt {
     color: var(--hud-orange);
-    font-size: 20px;
+    font-size: 24px;
     white-space: nowrap;
 }
 
@@ -395,7 +395,7 @@ body {
     outline: none;
     color: var(--hud-orange);
     font-family: var(--font-tactical);
-    font-size: 20px;
+    font-size: 24px;
     caret-color: transparent;
     text-transform: uppercase;
     text-shadow: 0 0 5px var(--hud-orange-glow);
@@ -577,7 +577,7 @@ body {
     border: 3px solid var(--hud-orange);
     color: var(--hud-orange);
     font-family: 'Black Ops One', var(--font-display);
-    font-size: 18px;
+    font-size: 22px;
     cursor: pointer;
     text-shadow: 0 0 10px var(--hud-orange-glow);
     transition: all 0.2s;

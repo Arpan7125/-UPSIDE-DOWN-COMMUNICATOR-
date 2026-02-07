@@ -890,7 +890,7 @@
 }
 
 .received-message {
-    font-size: 24px;
+    font-size: 36px;
     color: #ff00ff;
     text-shadow: 0 0 10px #ff00ff, 0 0 20px #9900ff;
     animation: messageGlow 1s ease-out;
@@ -956,11 +956,11 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    min-height: 60px;
+    min-height: 100px;
     background: #050000;
     border: 1px solid #331100;
     font-family: 'serif';
-    font-size: 32px;
+    font-size: 48px;
     color: #ff3300;
     text-shadow: 0 0 10px #ff0000;
     transition: all 0.2s;
