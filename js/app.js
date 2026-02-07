@@ -1,16 +1,11 @@
-/* ═══════════════════════════════════════════════════════════════
-   HAWKINS DIMENSIONAL TERMINAL - Main Application Controller
-   Upside Down Communicator v1.983
-   ═══════════════════════════════════════════════════════════════ */
 
 const App = {
     currentMode: 'morse',
     isBooted: false,
-    temperature: 68, // Starting temperature
-    psiStrain: 0, // Eleven's power strain
+    temperature: 68, 
+    psiStrain: 0, 
     transmissionLog: [],
 
-    // DOM Elements
     elements: {},
 
     init: function () {
@@ -21,7 +16,6 @@ const App = {
         setInterval(() => this.updateDateTime(), 1000);
     },
 
-    // Cache DOM elements
     cacheElements: function () {
         this.elements = {
             bootScreen: document.getElementById('boot-screen'),
@@ -33,7 +27,6 @@ const App = {
             modeRadios: document.querySelectorAll('input[name="mode"]'),
             datetime: document.getElementById('datetime'),
             warningText: document.getElementById('warning-text'),
-            // New creative elements
             tempValue: document.getElementById('temp-value'),
             tempFill: document.getElementById('temp-fill'),
             strainValue: document.getElementById('strain-value'),
@@ -49,7 +42,6 @@ const App = {
         };
     },
 
-    // Setup boot sequence animation
     setupBootSequence: function () {
         const bootLines = document.querySelectorAll('.boot-line');
 
@@ -61,7 +53,6 @@ const App = {
             }, delay);
         });
 
-        // Wait for key press to continue
         const bootHandler = (e) => {
             if (!this.isBooted) {
                 this.completeBoot();
@@ -70,13 +61,11 @@ const App = {
             }
         };
 
-        // Auto-boot after 4 seconds or on input
         setTimeout(() => {
             document.addEventListener('keydown', bootHandler);
             document.addEventListener('click', bootHandler);
         }, 3000);
 
-        // Force boot after 6 seconds
         setTimeout(() => {
             if (!this.isBooted) {
                 this.completeBoot();
@@ -84,55 +73,43 @@ const App = {
         }, 6000);
     },
 
-    // Complete boot sequence
     completeBoot: function () {
         if (this.isBooted) return;
         this.isBooted = true;
 
-        // Initialize audio
         AudioController.init();
         AudioController.playBootSound();
 
-        // Hide boot screen, show terminal
         this.elements.bootScreen.classList.add('hidden');
         this.elements.terminal.classList.remove('hidden');
         this.elements.terminal.classList.add('power-on');
 
-        // Initialize components
         setTimeout(() => {
             OscilloscopeRenderer.init();
             SanityController.init();
             RecoveryController.init();
 
-            // Focus input
             this.elements.messageInput?.focus();
 
-            // Remove power-on class
             this.elements.terminal.classList.remove('power-on');
 
-            // Start environmental systems
             this.startEnvironmentalSystems();
         }, 500);
 
-        // Start random glitches
         this.startRandomGlitches();
     },
 
-    // Setup event listeners
     setupEventListeners: function () {
-        // Transmit button
         this.elements.transmitBtn?.addEventListener('click', () => {
             this.handleTransmit();
         });
 
-        // Enter key to transmit
         this.elements.messageInput?.addEventListener('keydown', (e) => {
             if (e.key === 'Enter') {
                 this.handleTransmit();
             }
         });
 
-        // Mode selection
         this.elements.modeRadios.forEach(radio => {
             radio.addEventListener('change', (e) => {
                 this.currentMode = e.target.value;
@@ -140,29 +117,24 @@ const App = {
             });
         });
 
-        // Speed slider
         this.elements.speedSlider?.addEventListener('input', (e) => {
             const speed = parseInt(e.target.value);
             Transmitter.speed = speed;
             this.elements.speedValue.textContent = speed;
         });
 
-        // Audio indicator click
         this.elements.audioIndicator?.addEventListener('click', () => {
             AudioController.resume();
             this.elements.audioIndicator.classList.add('hidden');
         });
 
-        // Initialize audio on first interaction
         document.addEventListener('click', () => AudioController.resume(), { once: true });
         document.addEventListener('keydown', () => AudioController.resume(), { once: true });
 
-        // Listen for incoming messages from receiver page (bidirectional communication)
         window.addEventListener('storage', (e) => {
             if (e.key === 'upsidedown_transmission') {
                 try {
                     const data = JSON.parse(e.newValue);
-                    // Only receive if sent from the receiver page (not our own transmissions)
                     if (data.sender === 'receiver') {
                         this.handleIncomingMessage(data);
                     }
@@ -173,20 +145,15 @@ const App = {
         });
     },
 
-    // Handle incoming messages from the Upside Down (receiver page)
     handleIncomingMessage: function (transmission) {
         const message = transmission.message;
 
-        // Show warning that we're receiving
         this.showWarning('⚡ INCOMING FROM UPSIDE DOWN ⚡');
 
-        // Trigger power flicker
         this.triggerPowerFlicker();
 
-        // Play static sound
         AudioController.playStatic(500);
 
-        // Update receive signal indicator
         const signalIcon = document.getElementById('receive-signal');
         const receiveStatus = document.getElementById('receive-status');
         if (signalIcon) {
@@ -202,32 +169,25 @@ const App = {
             }, 3000);
         }
 
-        // Update received message display
         const messageDisplay = document.getElementById('received-message-display');
         if (messageDisplay) {
             messageDisplay.innerHTML = `<span class="received-message">${message}</span>`;
         }
 
-        // Add to received history
         this.addToReceivedHistory(message);
 
-        // Log the received message
         this.logTransmission('← ' + message);
 
-        // Display on the Christmas lights (visual feedback)
         this.displayIncomingMessage(message);
     },
 
-    // Add message to received history
     addToReceivedHistory: function (message) {
         const historyEntries = document.getElementById('received-entries');
         if (!historyEntries) return;
 
-        // Remove "no messages" text if present
         const noMessages = historyEntries.querySelector('.no-messages');
         if (noMessages) noMessages.remove();
 
-        // Create new entry
         const entry = document.createElement('div');
         entry.className = 'received-entry';
         const time = new Date().toLocaleTimeString();
@@ -236,26 +196,21 @@ const App = {
             <span class="msg-time">${time}</span>
         `;
 
-        // Add to top
         historyEntries.insertBefore(entry, historyEntries.firstChild);
 
-        // Keep only last 10 entries
         while (historyEntries.children.length > 10) {
             historyEntries.removeChild(historyEntries.lastChild);
         }
     },
 
-    // Display incoming message via Christmas lights animation
     displayIncomingMessage: async function (message) {
         const lights = document.querySelectorAll('.light-bulb');
 
         for (let i = 0; i < message.length; i++) {
             const char = message[i].toUpperCase();
 
-            // Clear all lights
             lights.forEach(l => l.classList.remove('active'));
 
-            // Light up the correct letter
             const targetLight = document.querySelector(`.light-bulb[data-letter="${char}"]`);
             if (targetLight) {
                 targetLight.classList.add('active');
@@ -265,14 +220,11 @@ const App = {
             await new Promise(resolve => setTimeout(resolve, 400));
         }
 
-        // Clear all lights at end
         lights.forEach(l => l.classList.remove('active'));
 
-        // Show completion message
         this.showWarning('MESSAGE RECEIVED: ' + message.substring(0, 15) + (message.length > 15 ? '...' : ''));
     },
 
-    // Handle transmit action
     handleTransmit: function () {
         const message = this.elements.messageInput?.value.trim();
 
@@ -287,36 +239,28 @@ const App = {
             return;
         }
 
-        // Decrease sanity on each transmission (dimensional strain)
         SanityController.decrease(5);
 
-        // Increase PSI strain (Eleven's effort)
         this.increasePsiStrain(15);
 
-        // Temperature drop during transmission
         this.dropTemperature(5);
 
-        // Log the transmission
         this.logTransmission(message);
 
-        // Random chance of power flicker
         if (Math.random() > 0.7) {
             this.triggerPowerFlicker();
         }
 
-        // Check if possessed - corrupt the message
         let transmitMessage = message;
         if (SanityController.isPossessed) {
             transmitMessage = Encoder.corruptMessage(message);
         }
 
-        // Transmit
+        
         Transmitter.transmit(transmitMessage, this.currentMode);
 
-        // Update button
         this.elements.transmitBtn.querySelector('.btn-text').textContent = 'ABORT';
 
-        // Reset button after transmission completes
         const checkComplete = setInterval(() => {
             if (!Transmitter.isTransmitting) {
                 this.elements.transmitBtn.querySelector('.btn-text').textContent = 'TRANSMIT';
@@ -325,7 +269,6 @@ const App = {
         }, 100);
     },
 
-    // Show warning message
     showWarning: function (text) {
         if (this.elements.warningText) {
             const original = this.elements.warningText.textContent;
@@ -336,7 +279,6 @@ const App = {
         }
     },
 
-    // Update date/time display (1983 format)
     updateDateTime: function () {
         const now = new Date();
         const date = now.toLocaleDateString('en-US', {
@@ -355,17 +297,10 @@ const App = {
             this.elements.datetime.textContent = `${date} ${time}`;
         }
 
-        // Update Vecna's clock hands
         this.updateVecnaClock(now);
     },
 
-    // ═══════════════════════════════════════════════════════════════
-    // NEW CREATIVE FEATURES
-    // ═══════════════════════════════════════════════════════════════
-
-    // Start environmental monitoring systems
     startEnvironmentalSystems: function () {
-        // Temperature recovery over time
         setInterval(() => {
             if (this.temperature < 68) {
                 this.temperature = Math.min(68, this.temperature + 1);
@@ -373,7 +308,6 @@ const App = {
             }
         }, 3000);
 
-        // PSI strain recovery over time
         setInterval(() => {
             if (this.psiStrain > 0) {
                 this.psiStrain = Math.max(0, this.psiStrain - 5);
@@ -381,12 +315,10 @@ const App = {
             }
         }, 2000);
 
-        // Random radio dial scanning
         setInterval(() => {
             this.scanRadioDial();
         }, 150);
 
-        // Random Vecna clock activation (rare)
         setInterval(() => {
             if (Math.random() > 0.98 && SanityController.sanity < 50) {
                 this.triggerVecnaClock();
@@ -394,17 +326,14 @@ const App = {
         }, 10000);
     },
 
-    // Temperature drop effect
     dropTemperature: function (amount) {
         this.temperature = Math.max(32, this.temperature - amount);
         this.updateTemperatureDisplay();
     },
 
-    // Update temperature display
     updateTemperatureDisplay: function () {
         if (this.elements.tempValue) {
             this.elements.tempValue.textContent = Math.round(this.temperature) + '°F';
-            // Color based on temperature
             if (this.temperature < 40) {
                 this.elements.tempValue.style.color = '#00ccff';
             } else if (this.temperature < 55) {
@@ -419,13 +348,11 @@ const App = {
         }
     },
 
-    // Increase PSI strain (Eleven's power meter)
     increasePsiStrain: function (amount) {
         this.psiStrain = Math.min(100, this.psiStrain + amount);
         this.updatePsiStrainDisplay();
     },
 
-    // Update PSI strain display
     updatePsiStrainDisplay: function () {
         if (this.elements.strainValue) {
             this.elements.strainValue.textContent = Math.round(this.psiStrain) + '%';
@@ -433,7 +360,6 @@ const App = {
         if (this.elements.strainFill) {
             this.elements.strainFill.style.width = this.psiStrain + '%';
         }
-        // Show nosebleed warning at high strain
         if (this.elements.nosebleedWarning) {
             if (this.psiStrain > 70) {
                 this.elements.nosebleedWarning.classList.add('visible');
@@ -443,10 +369,8 @@ const App = {
         }
     },
 
-    // Radio dial scanning effect
     scanRadioDial: function () {
         if (this.elements.dialNeedle) {
-            // Random movement with occasional spikes
             const basePosition = 30 + (Math.sin(Date.now() / 500) * 20);
             const jitter = (Math.random() - 0.5) * 10;
             const spike = Math.random() > 0.95 ? (Math.random() * 30 - 15) : 0;
@@ -454,7 +378,6 @@ const App = {
             const position = Math.max(5, Math.min(95, basePosition + jitter + spike));
             this.elements.dialNeedle.style.left = position + '%';
 
-            // Update static text on spikes
             if (this.elements.radioStatic && Math.abs(spike) > 10) {
                 const statics = ['▓▒░ SIGNAL ░▒▓', '░▒▓ VOID ▓▒░', '▓▓▓ ??? ▓▓▓', '░░░ HELP ░░░'];
                 this.elements.radioStatic.textContent = statics[Math.floor(Math.random() * statics.length)];
@@ -462,7 +385,6 @@ const App = {
         }
     },
 
-    // Update Vecna's clock
     updateVecnaClock: function (date) {
         const hours = date.getHours() % 12;
         const minutes = date.getMinutes();
@@ -477,7 +399,6 @@ const App = {
         if (minuteHand) minuteHand.style.transform = `rotate(${minuteAngle}deg)`;
     },
 
-    // Trigger Vecna's clock effect
     triggerVecnaClock: function () {
         if (this.elements.vecnaClock) {
             this.elements.vecnaClock.classList.add('active');
@@ -485,10 +406,8 @@ const App = {
                 this.elements.clockChime.classList.add('active');
             }
 
-            // Play ominous sound
             AudioController.playStatic(500);
 
-            // Decrease sanity
             SanityController.decrease(10);
 
             setTimeout(() => {
@@ -500,12 +419,10 @@ const App = {
         }
     },
 
-    // Log transmission
     logTransmission: function (message) {
         const timestamp = new Date().toLocaleTimeString('en-US', { hour12: false, hour: '2-digit', minute: '2-digit' });
         this.transmissionLog.unshift({ time: timestamp, msg: message.substring(0, 20) });
 
-        // Keep only last 5
         if (this.transmissionLog.length > 5) {
             this.transmissionLog = this.transmissionLog.slice(0, 5);
         }
@@ -513,7 +430,6 @@ const App = {
         this.updateTransmissionLog();
     },
 
-    // Update transmission log display
     updateTransmissionLog: function () {
         if (this.elements.logEntries) {
             if (this.transmissionLog.length === 0) {
@@ -526,7 +442,6 @@ const App = {
         }
     },
 
-    // Trigger power flicker
     triggerPowerFlicker: function () {
         if (this.elements.powerFlicker) {
             this.elements.powerFlicker.classList.add('flicker');
@@ -538,7 +453,6 @@ const App = {
         }
     },
 
-    // Random CRT glitches for authenticity
     startRandomGlitches: function () {
         setInterval(() => {
             if (Math.random() > 0.95 && !SanityController.isPossessed) {
@@ -547,7 +461,6 @@ const App = {
         }, 2000);
     },
 
-    // Trigger a random glitch effect
     triggerGlitch: function () {
         const glitches = ['jitter', 'hsync-issue', 'tracking-issue'];
         const glitch = glitches[Math.floor(Math.random() * glitches.length)];
@@ -560,7 +473,6 @@ const App = {
         }, 200);
     },
 
-    // Trigger signal fluctuation
     fluctuateSignal: function () {
         const signalFill = document.getElementById('signal-fill');
         const signalValue = document.getElementById('signal-value');
@@ -573,13 +485,10 @@ const App = {
     }
 };
 
-// Initialize on DOM ready
 document.addEventListener('DOMContentLoaded', () => {
     App.init();
 
-    // Fluctuate signal strength periodically
     setInterval(() => App.fluctuateSignal(), 3000);
 });
 
-// Export for debugging
 window.App = App;

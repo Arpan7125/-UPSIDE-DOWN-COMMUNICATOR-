@@ -1,7 +1,3 @@
-/* ═══════════════════════════════════════════════════════════════
-   RECOVERY SYSTEM - Escape from Possessed Mode
-   Konami Code, Hidden Pixel, Pattern Input
-   ═══════════════════════════════════════════════════════════════ */
 
 const RecoveryController = {
     // Konami Code sequence: ↑↑↓↓←→←→BA

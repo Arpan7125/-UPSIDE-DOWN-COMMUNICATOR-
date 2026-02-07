@@ -40,9 +40,7 @@
         </div>
     </div>
 
-    <!-- Main Terminal Container -->
     <div id="terminal-container" class="terminal-container hidden">
-        <!-- CRT Effects Layers -->
         <div class="crt-overlay"></div>
         <div class="portal-pulse-overlay" id="portal-pulse-overlay"></div>
         <div class="scanlines"></div>
@@ -52,7 +50,6 @@
         <div class="interlace"></div>
         <div class="tube-glow"></div>
         
-        <!-- Military Floating Particles -->
         <div class="upside-down-particles" id="upside-down-particles">
             <div class="particle"></div>
             <div class="particle"></div>
@@ -64,9 +61,7 @@
             <div class="particle"></div>
         </div>
         
-        <!-- Main Content -->
         <div class="terminal-content">
-            <!-- Header -->
             <header class="terminal-header">
                 <div class="header-left">
                     <span class="led-indicator active"></span>
@@ -79,16 +74,13 @@
                 </div>
             </header>
 
-            <!-- Warning Banner -->
             <div class="warning-banner" id="warning-banner">
                 <span class="warning-icon">⚠</span>
                 <span class="warning-text" id="warning-text">COMBAT ZONE ACTIVE - SECURE CHANNEL ENGAGED</span>
                 <span class="warning-icon">⚠</span>
             </div>
 
-            <!-- Side Panel: Environmental Readings -->
             <div class="environmental-panel">
-                <!-- Temperature (drops when portal active) -->
                 <div class="env-gauge temperature-gauge">
                     <div class="env-icon">🌡</div>
                     <div class="env-data">
@@ -100,7 +92,6 @@
                     </div>
                 </div>
                 
-                <!-- Eleven's Power Strain Meter -->
                 <div class="env-gauge strain-gauge">
                     <div class="env-icon">🔮</div>
                     <div class="env-data">
@@ -113,7 +104,6 @@
                     <div class="nosebleed-warning" id="nosebleed-warning">⚠ NOSEBLEED</div>
                 </div>
                 
-                <!-- Radio Frequency Dial -->
                 <div class="radio-dial-container">
                     <div class="radio-label">FREQUENCY MHz</div>
                     <div class="radio-dial" id="radio-dial">
@@ -126,7 +116,6 @@
                 </div>
             </div>
 
-            <!-- Christmas Lights Display (Joyce's Wall) -->
             <section class="display-section">
                 <div class="section-label">═══ ALPHABET TRANSMISSION ARRAY ═══</div>
                 <div class="christmas-lights" id="christmas-lights">
@@ -164,9 +153,7 @@
                 </div>
             </section>
 
-            <!-- Transmission Displays Row -->
             <div class="displays-row">
-                <!-- Morse Code Lamp -->
                 <section class="display-panel morse-panel">
                     <div class="panel-header">MORSE LAMP</div>
                     <div class="morse-lamp-container">
@@ -180,7 +167,6 @@
                     </div>
                 </section>
 
-                <!-- Binary Light Grid -->
                 <section class="display-panel binary-panel">
                     <div class="panel-header">BINARY GRID</div>
                     <div class="binary-grid" id="binary-grid">
@@ -197,7 +183,6 @@
                     <div class="binary-char" id="binary-char">_</div>
                 </section>
 
-                <!-- Oscilloscope -->
                 <section class="display-panel oscilloscope-panel">
                     <div class="panel-header">AUDIO WAVEFORM</div>
                     <div class="oscilloscope-container">
@@ -213,14 +198,12 @@
                     </div>
                 </section>
 
-                <!-- Ancient Glyphs -->
                 <section class="display-panel glyph-panel">
                     <div class="panel-header">ANCIENT GLYPHS</div>
                     <div class="glyph-display" id="glyph-display">_</div>
                 </section>
             </div>
 
-            <!-- Message Input Section -->
             <section class="input-section">
                 <div class="section-label">═══ MESSAGE INPUT TERMINAL ═══</div>
                 <div class="input-container">
@@ -228,7 +211,6 @@
                     <input type="text" id="message-input" class="message-input" maxlength="50" autocomplete="off" spellcheck="false">
                     <span class="input-cursor">_</span>
                 </div>
-                <!-- Transmission Log -->
                 <div class="transmission-log" id="transmission-log">
                     <div class="log-header">LAST TRANSMISSIONS:</div>
                     <div class="log-entries" id="log-entries">
@@ -237,7 +219,6 @@
                 </div>
             </section>
 
-            <!-- Mode Selection -->
             <section class="mode-section">
                 <div class="mode-label">TRANSMISSION MODE:</div>
                 <div class="mode-switches">
@@ -274,9 +255,7 @@
                 </div>
             </section>
 
-            <!-- Control Panel -->
             <section class="control-panel">
-                <!-- Gauges -->
                 <div class="gauges-container">
                     <div class="gauge">
                         <div class="gauge-label">SANITY</div>
@@ -308,7 +287,6 @@
                     </div>
                 </div>
 
-                <!-- Transmit Button -->
                 <div class="transmit-container">
                     <button id="transmit-btn" class="transmit-btn">
                         <span class="btn-icon">◉</span>
@@ -321,14 +299,12 @@
                     </div>
                 </div>
 
-                <!-- Demogorgon Warning -->
                 <div class="demogorgon-warning" id="demogorgon-warning">
                     <div class="warning-pulse"></div>
                     <span class="warning-label">⚠ ENTITY DETECTED</span>
                 </div>
             </section>
 
-            <!-- Received Messages Section (from Upside Down) -->
             <section class="received-section">
                 <div class="section-label">═══ INCOMING FROM UPSIDE DOWN ═══</div>
                 <div class="receive-indicator">
@@ -346,7 +322,6 @@
                 </div>
             </section>
 
-            <!-- Status Bar -->
             <footer class="status-bar">
                 <span class="status-item">HAWKINS LAB TERMINAL</span>
                 <span class="status-item" id="datetime"></span>
@@ -355,7 +330,6 @@
             </footer>
         </div>
 
-        <!-- Vecna's Clock -->
         <div class="vecna-clock" id="vecna-clock">
             <div class="clock-face">
                 <div class="clock-hand hour-hand"></div>
@@ -365,10 +339,8 @@
             <div class="clock-chime" id="clock-chime">🕰️ BONG...</div>
         </div>
 
-        <!-- Power Flicker Overlay -->
         <div class="power-flicker-overlay" id="power-flicker-overlay"></div>
 
-        <!-- Possessed Mode Overlay -->
         <div class="possessed-overlay" id="possessed-overlay">
             <div class="possessed-text">
                 <div class="glitch-text" data-text="POSSESSED">POSSESSED</div>
@@ -380,22 +352,18 @@
             <div class="mind-flayer-tendrils"></div>
         </div>
 
-        <!-- Recovery Flash -->
         <div class="recovery-flash" id="recovery-flash">
             <div class="recovery-text">SYSTEM RESTORED</div>
         </div>
 
-        <!-- Hidden Recovery Pixel -->
         <div class="hidden-pixel" id="hidden-pixel" title="???"></div>
 
-        <!-- Ambient Audio Indicator -->
         <div class="audio-indicator" id="audio-indicator">
             <span class="audio-icon">🔊</span>
             <span class="audio-text">CLICK FOR AUDIO</span>
         </div>
     </div>
 
-    <!-- Scripts -->
     <script src="js/encoder.js"></script>
     <script src="js/transmitter.js"></script>
     <script src="js/audio.js"></script>

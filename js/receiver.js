@@ -1,7 +1,4 @@
-/* ═══════════════════════════════════════════════════════════════
-   UPSIDE DOWN RECEIVER - Signal Detection & Display
-   Receives transmissions from the sender terminal
-   ═══════════════════════════════════════════════════════════════ */
+
 
 const Receiver = {
     isConnected: false,

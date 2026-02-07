@@ -1,7 +1,3 @@
-/* ═══════════════════════════════════════════════════════════════
-   AUDIO CONTROLLER - Web Audio API Sound Effects
-   Retro beeps, tones, and eerie ambient sounds
-   ═══════════════════════════════════════════════════════════════ */
 
 const AudioController = {
     audioContext: null,
@@ -28,7 +24,6 @@ const AudioController = {
         }
     },
 
-    // Play a simple tone
     playTone: function (frequency, duration, type = 'square') {
         if (!this.isInitialized) return;
         this.resume();
@@ -49,7 +44,6 @@ const AudioController = {
         osc.stop(this.audioContext.currentTime + duration / 1000);
     },
 
-    // Boot up sound
     playBootSound: function () {
         if (!this.isInitialized) this.init();
 
@@ -59,18 +53,15 @@ const AudioController = {
         });
     },
 
-    // Error/warning beep
     playErrorBeep: function () {
         this.playTone(150, 200, 'sawtooth');
         setTimeout(() => this.playTone(100, 300, 'sawtooth'), 250);
     },
 
-    // Possessed mode sounds
     playPossessedSound: function () {
         if (!this.isInitialized) return;
         this.resume();
 
-        // Create eerie noise
         const osc1 = this.audioContext.createOscillator();
         const osc2 = this.audioContext.createOscillator();
         const gain = this.audioContext.createGain();
@@ -93,7 +84,6 @@ const AudioController = {
         osc2.stop(this.audioContext.currentTime + 2);
     },
 
-    // Recovery sound
     playRecoverySound: function () {
         const notes = [400, 500, 600, 800, 1000];
         notes.forEach((freq, i) => {
@@ -101,7 +91,6 @@ const AudioController = {
         });
     },
 
-    // Static noise
     playStatic: function (duration) {
         if (!this.isInitialized) return;
         this.resume();
@@ -126,7 +115,6 @@ const AudioController = {
         noise.start();
     },
 
-    // Demogorgon warning
     playDemogorgonWarning: function () {
         this.playTone(80, 500, 'sawtooth');
         setTimeout(() => this.playTone(60, 700, 'sawtooth'), 300);

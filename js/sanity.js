@@ -1,7 +1,4 @@
-/* ═══════════════════════════════════════════════════════════════
-   SANITY METER - Mind Flayer Corruption System
-   Tracks system stability and triggers possessed mode
-   ═══════════════════════════════════════════════════════════════ */
+
 
 const SanityController = {
     sanity: 100,
